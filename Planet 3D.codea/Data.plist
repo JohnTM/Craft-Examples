@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Color</key>
+	<string>[36.0,251.0,0.0,255.0]</string>
+	<key>Density</key>
+	<real>441.55844116210938</real>
+	<key>Detail</key>
+	<real>5</real>
+	<key>Force</key>
+	<real>45.454544067382812</real>
+	<key>Frequency</key>
+	<real>0.42012989521026611</real>
+	<key>Height</key>
+	<real>0.095238097012042999</real>
+	<key>ModelNumber</key>
+	<real>163</real>
+	<key>ModelScale</key>
+	<real>0.10000000149011612</real>
+	<key>Models</key>
+	<string>§</string>
+	<key>RotateX</key>
+	<real>13</real>
+	<key>RotateY</key>
+	<real>-6783.5</real>
+	<key>Seed</key>
+	<real>153680</real>
+	<key>Spacing</key>
+	<real>0.20714285969734192</real>
+	<key>Wind</key>
+	<real>0.10822510719299316</real>
+	<key>lastStep</key>
+	<real>2</real>
+</dict>
+</plist>

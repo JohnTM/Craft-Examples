@@ -1,0 +1,1 @@
+{"slots":[{"block":"Glass"},{"block":"Red Brick"},{"block":"Sign"},{"block":"Test"},{"block":"Piston"},{"block":"Wooden Fence"},{"block":"Chest"},[]],"selected":7}
