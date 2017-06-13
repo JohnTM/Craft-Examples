@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bindings</key>
+	<dict>
+		<key>forward</key>
+		<string>vec3(0,0,1)</string>
+		<key>modelViewProjection</key>
+		<string>modelMatrix() * viewMatrix() * projectionMatrix()</string>
+		<key>right</key>
+		<string>vec3(1,0,0)</string>
+		<key>strength</key>
+		<string>vec2(0.5,0.5)</string>
+		<key>texture</key>
+		<string>"Cargo Bot:Codea Icon"</string>
+		<key>up</key>
+		<string>vec3(0,1,0)</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bindings</key>
+	<dict>
+		<key>diffuse</key>
+		<string>vec3(0,0,0)</string>
+		<key>modelViewMatrix</key>
+		<string>matrix()</string>
+		<key>normalMatrix</key>
+		<string>matrix()</string>
+		<key>projectionMatrix</key>
+		<string>matrix()</string>
+	</dict>
+	<key>icon</key>
+	<string></string>
+</dict>
+</plist>
