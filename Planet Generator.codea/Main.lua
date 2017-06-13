@@ -44,7 +44,7 @@ PLANET_RADIUS = 200
 function setup()   
     -- Create the craft scene
     scene = craft.scene()
-    camera = scene.camera:get(camera)
+    camera = scene.camera:get(craft.camera)
 
     -- Get the sky material and adjust color to black
     skyMat = scene.sky:get(craft.renderer).material
@@ -65,7 +65,7 @@ function setup()
     -- Manual Regeneration
     parameter.integer("Seed", 0, 1000, 121)
     parameter.action("Generate", function() 
-        camera.main.nearPlane = 0.1
+        camera.nearPlane = 0.1
         planet:generate(gen, planets.earth)
         moon:generate(moonGen, planets.moon)
     end)
@@ -105,16 +105,15 @@ end
 
 -- Update the scene
 function update()
-    scene:update()
+    scene:update(DeltaTime)
 
     -- For now the generator may override the basic scene lighting so we set it again here
     scene.ambientColor = color(80, 55, 84, 255)
     scene.sun:get(craft.light).color = vec3(0.9,0.9,0.9)
     scene.sun.rotation = quat.eulerAngles(25,0,95)
 
-    camera.main.nearPlane = 10
-    camera.main.farPlane = 4000        
-
+    camera.nearPlane = 10
+    camera.farPlane = 4000        
     
     local orbit = ElapsedTime * 12
     moon.entity.rotation = quat.eulerAngles(0, 0, orbit)    
