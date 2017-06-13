@@ -18,7 +18,7 @@
 -- Step 8: Generate a subdivided cube and apply the cubemaps using a custom material
 --
 -- Notes:
--- A greater than 90 degree fov is used for cubemap generation.
+-- A slightly greater than 90 degree fov is used for cubemap generation.
 -- This allows some padding used in normal map generation, which is then stripped off later.
 --
 -- There are several custom shaders used by this example

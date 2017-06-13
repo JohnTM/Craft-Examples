@@ -7,22 +7,34 @@ function PlanetGenerator:init(entity, radius, width)
     --self.camera.entity.parent = self.entity
     --self.camera.mask = 2
 
+    -- The radius of the internal splat sphere
     self.radius = 1
+
+    -- The width and height of the individual cube textures
     self.width = width
     self.height = width
     
+    -- The amount of padding (in pixels) for intermediate cube images
     self.cubePadding = 2
+    -- Reusable image for rending out cube images
     self.scratchPadded = image(self.width + self.cubePadding, self.height + self.cubePadding)
     
+    -- Used to apply max operation to cube images (for setting the minimum height)
     self.maxFilter = shader("Project:TerrainMax")
     self.maxFilter.maxThreshold = 0.09
     
+    -- Used to generate terrain color from the height map
     self.terrainFilter = shader("Project:TerrainColor")
     
+    -- Used to generate a normal map from the height map
     self.normalMapFilter = shader("Project:TerrainNormals")
+    -- How strong the normal map effect should be
     self.normalMapStrength = 15
 end
 
+-- Generates the color, height and normal maps to be used on a planet model
+-- Seed is used to control the initial random values and options controls the appearance
+-- of the generated terrain
 function PlanetGenerator:generate(seed, options)
     self.splats = {}
     self.options = options
@@ -74,6 +86,7 @@ function PlanetGenerator:generate(seed, options)
     end
 end
 
+-- Adds a single splat given an image and size, opacity and position values
 function PlanetGenerator:addSplat(img, size, opacity, x, y, z)    
     local s = scene:entity() 
     s.rotation = quat.eulerAngles(x,y,z)
@@ -91,6 +104,7 @@ function PlanetGenerator:addSplat(img, size, opacity, x, y, z)
     table.insert(self.splats, s)   
 end
 
+-- Renders a single plane of the cube map given a camera and forward/up vector combination
 function PlanetGenerator:renderPlane(c, forward, up, flipNormals)
 
     pushStyle()
@@ -137,6 +151,7 @@ function PlanetGenerator:renderPlane(c, forward, up, flipNormals)
     collectgarbage()
 end
 
+-- Applies a filter to an image using a shader and returns it as a new image
 function PlanetGenerator:filterImage(img, filter)
     local copy = img:copy()
     
