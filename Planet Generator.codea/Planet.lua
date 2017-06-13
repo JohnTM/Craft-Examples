@@ -14,21 +14,21 @@ function Planet:init(entity, radius, gridSize, maxLod, atmos)
     self.chunks = 
     {
         -- Top
-        craft.entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,1,0), vec3(0,0,1)}),
+        scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,1,0), vec3(0,0,1)}),
         -- Left
-        craft.entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(1,0,0), vec3(0,1,0)}),        
+        scene:entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(1,0,0), vec3(0,1,0)}),        
         -- Right
-        craft.entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(-1,0,0), vec3(0,-1,0)}),
+        scene:entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(-1,0,0), vec3(0,-1,0)}),
         -- Bottom
-        craft.entity():add(TerrainChunk, self, {vec3(-1,0,0), vec3(0,-1,0), vec3(0,0,1)}),
+        scene:entity():add(TerrainChunk, self, {vec3(-1,0,0), vec3(0,-1,0), vec3(0,0,1)}),
         -- Front
-        craft.entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,1), vec3(0,-1,0)}),        
+        scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,1), vec3(0,-1,0)}),        
         -- Back
-        craft.entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,-1), vec3(0,1,0)}),
+        scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,-1), vec3(0,1,0)}),
     }
     
     
-    self.oceanEntity = craft.entity()
+    self.oceanEntity = scene:entity()
     self.oceanEntity.parent = entity
     self.ocean = self.oceanEntity:add(craft.renderer, craft.mesh.icosphere(1.0, 4, false))
     local s = self.radius + 10
@@ -41,7 +41,7 @@ function Planet:init(entity, radius, gridSize, maxLod, atmos)
     self.oceanEntity.active = false
   
     if atmos then
-        local atmosEntity = craft.entity()
+        local atmosEntity = scene:entity()
         atmosEntity.parent = entity  
         self.atmos = atmosEntity:add(craft.renderer, craft.mesh.icosphere(-self.radius -100, 3, false))
         self.atmos.material = craft.material("Project:Basic")

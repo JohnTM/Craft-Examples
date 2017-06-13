@@ -3,7 +3,7 @@ PlanetGenerator = class()
 function PlanetGenerator:init(entity, radius, width)
     self.entity = entity
     
-    --self.camera = craft.entity():add(craft.camera, 90, 0.1, 10, false)
+    --self.camera = scene:entity():add(craft.camera, 90, 0.1, 10, false)
     --self.camera.entity.parent = self.entity
     --self.camera.mask = 2
 
@@ -47,12 +47,12 @@ function PlanetGenerator:generate(seed, options)
     
     self.terrainFilter.ramp = GradientRamp(256,16, options.terrainRamp).img
     
-    local c = craft.camera.main
+    local c = camera
     c.entity.position = vec3(0,0,0)
     c.fieldOfView = 2.0 * math.deg( math.atan((2.0 + self.cubePadding / self.width) * 0.5) )
-    craft.scene.ambientColor = color(255, 255, 255, 255)
-    craft.scene.sun.active = false
-    --craft.scene.sun:get(craft.light).mask = ~2
+    scene.ambientColor = color(255, 255, 255, 255)
+    scene.sun.active = false
+    --scene.sun:get(craft.light).mask = ~2
     
      
     self:renderPlane(c, vec3(-1,0,0), vec3(0,1,0), vec2(1,1))    
@@ -67,7 +67,7 @@ function PlanetGenerator:generate(seed, options)
     self.normalMap = craft.cubeTexture(self.normalMaps)
     
     c.fieldOfView = 45
-    craft.scene.sun.active = true
+    scene.sun.active = true
     
     for k,v in pairs(self.splats) do
         v:destroy()
@@ -75,7 +75,7 @@ function PlanetGenerator:generate(seed, options)
 end
 
 function PlanetGenerator:addSplat(img, size, opacity, x, y, z)    
-    local s = craft.entity() 
+    local s = scene:entity() 
     s.rotation = quat.eulerAngles(x,y,z)
     s.position = -s.forward * self.radius
     
