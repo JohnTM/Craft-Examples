@@ -7,6 +7,8 @@ function setup()
     Voxel Terrain Example
     ]])
     
+    scene = craft.scene()
+    
     allBlocks = blocks()
   
     skyMat = scene.sky:get(craft.renderer).material
@@ -80,7 +82,7 @@ function setup()
             end
         end)
         
-        player = craft.entity():add(BasicPlayer, scene.camera:get(craft.camera), pos:unpack())
+        player = scene:entity():add(BasicPlayer, scene.camera:get(craft.camera), pos:unpack())
         scene.fogEnabled = true
     end)
 end
