@@ -8,10 +8,21 @@ function TerrainChunk:init(entity, planet, axes)
     --self.entity.rotation = quat.lookRotation(axes[3], axes[2])
     self.axes = axes
 
-    self.mesh = self:makeGridMesh()  
-    self.renderer = self.entity:add(craft.renderer, self.mesh)
+    self.thread = coroutine.create(self.makeGridMesh)
+    
+    self.renderer = self.entity:add(craft.renderer)
     self.renderer.material = self.planet.material
+    --self.renderer.material = craft.material("Materials:Standard")
+end
 
+function TerrainChunk:update()
+    if self.thread then
+        local status, result = coroutine.resume(self.thread, self)
+        if result then
+            self.renderer.mesh = result
+            self.thread = nil
+        end
+    end
 end
 
 function TerrainChunk:makeGridMesh()
@@ -31,11 +42,16 @@ function TerrainChunk:makeGridMesh()
     local white = color(255, 255, 255, 255)
     local indices = {}
     
+    local padding = 2.0
+    local mapSize = (256.0 + padding) * 2.0
+    local inset = padding
     
     local p = vec3()
     local i = 1
-    for z = 0,gs do
+    for z = 0,gs do       
         for x = 0,gs do
+            
+            if x % 60 == 0 then coroutine.yield() end
             
             local xx = (((x+0.0) / gs) * 2.0 - 1.0)
             local zz = (((z+0.0) / gs) * 2.0 - 1.0)
@@ -54,15 +70,27 @@ function TerrainChunk:makeGridMesh()
             --m:normal(i, p:normalize())
             --m:color(i, 255, 255, 255, 255)
             
-            --m:uv(i, (xx+1.0)*0.5, (zz+1.0)*0.5)
+            local s = (xx+1.0)*0.5
+            local t = (zz+1.0)*0.5
+            
+            if (s == 0 or s == 1) and t == 0 then
+            end
+
+            --s = (inset + (512) * s + 0.5) / (mapSize)
+            --t = (inset + (512) * t + 0.5) / (mapSize)
+            
+            m:uv(i, s, t)
             
             i = i + 1
         end
     end
     
     m.positions = positions
+    coroutine.yield()
     m.normals = normals
+    coroutine.yield()
     m.colors = colors
+    coroutine.yield()
     
     i = 1
     for z = 0,gs-1 do
@@ -73,6 +101,8 @@ function TerrainChunk:makeGridMesh()
             table.insert(indices, (z+1)*(gs+1)+x+1)                                     
             table.insert(indices, z*(gs+1)+x+2)   
             table.insert(indices,(z+1)*(gs+1)+x+2)  
+            
+            if x % 120 == 0 then coroutine.yield() end
                                                                                  
             --[[m:index(i, z*(gs+1)+x+1)    
             m:index(i+1, z*(gs+1)+x+2)                  

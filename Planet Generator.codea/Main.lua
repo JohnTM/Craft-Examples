@@ -53,7 +53,7 @@ function setup()
     
     -- Create the generators for the planet and moon
     -- These are attached to an entity for rendering purposes
-    gen = scene:entity():add(PlanetGenerator, PLANET_RADIUS, 512)
+    gen = scene:entity():add(PlanetGenerator, PLANET_RADIUS, 514)
     moonGen = scene:entity():add(PlanetGenerator, PLANET_RADIUS, 128)
     
     -- Use the OrbitViewer for basic camera control
@@ -65,7 +65,6 @@ function setup()
     -- Manual Regeneration
     parameter.integer("Seed", 0, 1000, 121)
     parameter.action("Generate", function() 
-        camera.nearPlane = 0.1
         planet:generate(gen, planets.earth)
         moon:generate(moonGen, planets.moon)
     end)
@@ -74,7 +73,7 @@ function setup()
     parameter.number("Displacement", 0, 50/200.0, 35/200.0)
 
     -- The planet entity
-    planet = scene:entity():add(Planet, PLANET_RADIUS, 128, 4, true)  
+    planet = scene:entity():add(Planet, PLANET_RADIUS, 64, 4, true)  
 
     -- The moon entity
     moon = scene:entity():add(Planet, PLANET_RADIUS / 6, 32, 4)  

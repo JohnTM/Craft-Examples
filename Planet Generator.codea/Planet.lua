@@ -16,18 +16,18 @@ function Planet:init(entity, radius, gridSize, maxLod, atmos)
     -- The top level chunks of the planet, one for each of the 6 faces
     self.chunks = 
     {
+        -- Right
+        scene:entity():add(TerrainChunk, self, {vec3(0,0,-1), vec3(1,0,0), vec3(0,-1,0)}),        
+        -- Left
+        scene:entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(-1,0,0), vec3(0,-1,0)}),
         -- Top
         scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,1,0), vec3(0,0,1)}),
-        -- Left
-        scene:entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(1,0,0), vec3(0,1,0)}),        
-        -- Right
-        scene:entity():add(TerrainChunk, self, {vec3(0,0,1), vec3(-1,0,0), vec3(0,-1,0)}),
         -- Bottom
-        scene:entity():add(TerrainChunk, self, {vec3(-1,0,0), vec3(0,-1,0), vec3(0,0,1)}),
+        scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,-1,0), vec3(0,0,-1)}),
         -- Front
         scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,1), vec3(0,-1,0)}),        
         -- Back
-        scene:entity():add(TerrainChunk, self, {vec3(1,0,0), vec3(0,0,-1), vec3(0,1,0)}),
+        scene:entity():add(TerrainChunk, self, {vec3(-1,0,0), vec3(0,0,-1), vec3(0,-1,0)}),
     }
     
     -- The ocean, rendered using a transparent icosphere
@@ -61,6 +61,14 @@ function Planet:readMaps(gen)
     self.material.displacementMap = gen.heightMap
     self.material.displacementScale = Displacement
     self.material.normalMap = gen.normalMap
+    
+    --[[
+    for i = 1,6 do
+        self.chunks[i].renderer.material.map = gen.heightMaps[i] 
+        self.chunks[i].renderer.material.displacementMap = gen.heightMaps[i] 
+        self.chunks[i].renderer.material.normalMap = gen.normalMaps[i] 
+        self.chunks[i].renderer.material.displacementScale = Displacement * self.radius
+    end]]
 end
 
 -- Updates the displacement setting on the material for interactive height adjustments
