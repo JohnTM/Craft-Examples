@@ -1,5 +1,5 @@
 function testDynamicBlock()
-    local test = scene.voxels.blocks.create("Test")
+    local test = scene.voxels.blocks:create("Test")
     test.dynamic = true
     test.geometry = TRANSPARENT
     
@@ -20,7 +20,7 @@ function testDynamicBlock()
 end
 
 function signBlock()
-    local sign = scene.voxels.blocks.create("Sign")
+    local sign = scene.voxels.blocks:create("Sign")
     sign.setTexture(ALL, "Blocks:Wood")
     sign.scripted = true
     sign.geometry = TRANSPARENT
@@ -77,7 +77,7 @@ function signBlock()
 end
     
 function stairsBlock(name, texture)
-    local stairs = scene.voxels.blocks.create(name)
+    local stairs = scene.voxels.blocks:create(name)
     stairs.setTexture(ALL, texture)
     stairs.geometry = TRANSPARENT
     stairs.scripted = true

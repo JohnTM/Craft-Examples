@@ -11,7 +11,7 @@ function piston()
     end
     
     -- Block representing the piston's pusher
-    local pusher = scene.voxels.blocks.create("Pusher")
+    local pusher = scene.voxels.blocks:create("Pusher")
     pusher.setTexture(ALL, "Blocks:Wood")  
     pusher.scripted = true
     pusher.geometry = TRANSPARENT   
@@ -45,7 +45,7 @@ function piston()
     end
     
     
-    local piston = scene.voxels.blocks.create("Piston")  
+    local piston = scene.voxels.blocks:create("Piston")  
     piston.setTexture(ALL, "Blocks:Stone")
     piston.geometry = TRANSPARENT
     piston.scripted = true    

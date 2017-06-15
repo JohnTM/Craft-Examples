@@ -1,5 +1,5 @@
 function chest(capacity)
-    local chest = scene.voxels.blocks.create("Chest")
+    local chest = scene.voxels.blocks:create("Chest")
     chest.dynamic = true
     chest.geometry = TRANSPARENT
     

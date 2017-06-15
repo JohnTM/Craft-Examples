@@ -1,7 +1,7 @@
 function tnt()
     scene.voxels.blocks:addAsset("Dropbox:TNT")
     
-    local tnt = scene.voxels.blocks.create("TNT")
+    local tnt = scene.voxels.blocks:create("TNT")
     tnt.setTexture(ALL, "Dropbox:TNT")
     tnt.scripted = true
     
