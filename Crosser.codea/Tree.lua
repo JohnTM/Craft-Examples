@@ -4,12 +4,12 @@ function Tree:init(e)
     self.entity = e
 
     if treeMesh == nil then
-        local temp = craft.entity()
+        local temp = scene:entity()
         treeMesh = temp:add(craft.volume, "Project:Tree").mesh
         temp:destroy()
     end
        
-    self.model = craft.entity()
+    self.model = scene:entity()
     self.mr = self.model:add(craft.renderer, treeMesh)
     self.model.parent = self.entity
     

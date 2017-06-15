@@ -4,7 +4,7 @@ function Log:init(e, length, direction, speed)
     self.entity = e
     
     if logMesh == nil then
-        local temp = craft.entity()
+        local temp = scene:entity()
         logMesh = temp:add(craft.volume, "Project:Log").mesh
         logMeshCenter = logMesh.bounds.size * 0.5
         logScale = 1.0 / logMesh.bounds.size.x
@@ -25,13 +25,13 @@ end
 
 function Log:addPart()
     local part = {} 
-    part.pivot = craft.entity()
+    part.pivot = scene:entity()
     
     part.pivot.parent = self.entity
     part.pivot.rotation = quat.eulerAngles(0,0,90)
     part.pivot.scale = vec3(logScale * 0.5, logScale * 0.5, logScale)
         
-    part.model = craft.entity()
+    part.model = scene:entity()
     part.model.parent = part.pivot
     part.model.x = -logMeshCenter.x
     part.model.z = -logMeshCenter.z 

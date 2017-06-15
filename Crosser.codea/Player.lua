@@ -19,12 +19,12 @@ function Player:init(e, p)
     self.size = vec3(0.4,0.6,0.4)
     self.bounds = craft.bounds(vec3(0,0,0), vec3(0,0,0))
     
-    self.model = craft.entity()
+    self.model = scene:entity()
     self.vm = self.model:add(craft.volume, 1,1,1)
     self.vm:load(Player.models[math.random(1,#Player.models)])
     
     -- Use a pivot so we can rotate the model around the center
-    self.pivot = craft.entity()
+    self.pivot = scene:entity()
     self.pivot.parent = self.entity
     self.model.parent = self.pivot
     self.entity.position = p

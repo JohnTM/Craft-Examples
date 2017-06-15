@@ -11,19 +11,22 @@ function setup()
     -- Use this to control which level to create
     --math.randomseed(1)
     
-    player = craft.entity():add(Player, vec3(0,0,6))
+    scene = craft.scene()
+
+    player = scene:entity():add(Player, vec3(0,0,6))
     
-    craft.camera.main.ortho = true 
-    craft.camera.main.orthoSize = 5
-    craft.scene.camera.rotation = quat.eulerAngles(45,0,25)    
-    craft.scene.sun.rotation = quat.eulerAngles(-45,0,65)
+    camera = scene.camera:get(craft.camera)
+    camera.main.ortho = true 
+    camera.main.orthoSize = 5
+    camera.rotation = quat.eulerAngles(45,0,25)    
+    scene.sun.rotation = quat.eulerAngles(-45,0,65)
     
     sections = {}
 
 end
 
 function addRoadSection(t)
-    local e = craft.entity()
+    local e = scene:entity()
     
     if #sections > 0 then
         e.z = sections[#sections].entity.z + TILE_SIZE
@@ -114,20 +117,23 @@ function generateRoadSections()
     end    
 end
 
-function update()
+function update(dt)
+    scene:update(dt)
+
     generateRoadSections()
     
     local pos = player.entity.worldPosition
     local cx = math.min( math.max( pos.x, ROAD_MIN_X + 4), ROAD_MAX_X - 14)
     
-    craft.scene.camera.z = craft.scene.camera.z * 0.9 + (pos.z-5) * 0.1
-    craft.scene.camera.y = 10       
-    craft.scene.camera.x = craft.scene.camera.x * 0.9 + cx * 0.1    
+    scene.camera.z = craft.scene.camera.z * 0.9 + (pos.z-5) * 0.1
+    scene.camera.y = 10       
+    scene.camera.x = craft.scene.camera.x * 0.9 + cx * 0.1    
 
 end
 
 function draw()
- 
+    update(DeltaTime)
+    scene:draw()
 end
 
 function touched(touch)

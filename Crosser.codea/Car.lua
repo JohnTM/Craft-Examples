@@ -3,18 +3,18 @@ Car = class()
 function Car:init(e, section, direction, speed)
     self.entity = e
     
-    self.pivot = craft.entity()
+    self.pivot = scene:entity()
     self.pivot.parent = self.entity
     self.pivot.rotation = quat.eulerAngles(0,0,(direction == DIRECTION_LEFT) and 90 or -90)
     
     if carMesh == nil then
-        local temp = craft.entity()
+        local temp = scene:entity()
         carMesh = temp:add(craft.volume, "Project:Car").mesh
         carMeshCenter = carMesh.bounds.size * 0.5
         temp:destroy()
     end
     
-    self.model = craft.entity()
+    self.model = scene:entity()
     self.model.parent = self.pivot
     self.model.x = -carMeshCenter.x
     self.model.z = -carMeshCenter.z 
@@ -29,7 +29,7 @@ function Car:init(e, section, direction, speed)
     
     self.bounds = craft.bounds(vec3(), vec3())
     
-    --self.box = craft.entity()
+    --self.box = scene:entity()
     --self.box.parent = self.entity
     --self.box:add(craft.renderer, Mesh.Cube(self.size)).material = Material("Materials:Standard")
     
