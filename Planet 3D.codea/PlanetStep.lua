@@ -1,7 +1,9 @@
 -- Planet Generator
  
 function setup()
-    craft.scene.sun:get(craft.light).color = vec3(0.6, 0.6, 0.6)
+    scene = craft.scene()
+
+    scene.sun:get(craft.light).color = vec3(0.6, 0.6, 0.6)
     
     exclude = readText("Project:exclude") and json.decode(readText("Project:exclude")) or {}
     
@@ -21,15 +23,19 @@ function setup()
     
     models = assetList("Nature", "models")
     
-    viewer = craft.scene.camera:add(OrbitViewer, vec3(0,0,0), 10, 2, 20)
+    viewer = scene.camera:add(OrbitViewer, vec3(0,0,0), 10, 2, 20)
 
     bodies = {}
     planet = makePlanet()
     
-    parameter.boolean("fog", craft.scene.fogEnabled, function(b) craft.scene.fogEnabled = b end)
-    parameter.color("fogColor", craft.scene.fogColor, function(c) craft.scene.fogColor = c end)
-    parameter.number("fogNear", 0, 100, craft.scene.fogNear, function(n) craft.scene.fogNear = n end)    
-    parameter.number("fogFar", 0, 100, craft.scene.fogFar, function(n) craft.scene.fogFar = n end)    
+    parameter.boolean("fog", scene.fogEnabled, function(b) scene.fogEnabled = b end)
+    parameter.color("fogColor", scene.fogColor, function(c) scene.fogColor = c end)
+    parameter.number("fogNear", 0, 100, scene.fogNear, function(n) scene.fogNear = n end)    
+    parameter.number("fogFar", 0, 100, scene.fogFar, function(n) scene.fogFar = n end)    
+end
+
+function cleanup()
+    touches.removeHandler(viewer)
 end
 
 function checkClear(objects, p, r)
@@ -44,8 +50,8 @@ end
 
 function makePlanet()
 
-    local planet = craft.entity()
-    local mr = planet:add(craft.renderer, craft.mesh.icoSphere(3, Detail, true))
+    local planet = scene:entity()
+    local mr = planet:add(craft.renderer, craft.mesh.icosphere(3, Detail, true))
     local chance = 1.0 / mr.mesh.vertexCount
     
     local points = {}
@@ -56,7 +62,7 @@ function makePlanet()
     
     local p = vec3()
     local r = vec3()
-    for i = 0, mr.mesh.vertexCount-1 do        
+    for i = 1, mr.mesh.vertexCount do        
         p:set(mr.mesh:position(i))
         
         local n = noise:getValue(p.x, p.y, p.z)
@@ -66,7 +72,7 @@ function makePlanet()
         
         mr.mesh:position(i, p)
         
-        if i % 3 == 0 then
+        if (i-1) % 3 == 0 then
             local c = 255 * (0.60 + math.abs(n) * 0.4)
             c = color(c,c,c,1.0)
             mr.mesh:color(i, c)
@@ -104,7 +110,7 @@ function calcTangent(n)
 end
 
 function addRandomDetailModel(position, normal)
-    local pivot = craft.entity()
+    local pivot = scene:entity()
     pivot.position = position - normal * 0.05
     
     -- calculate tangent from normal
@@ -113,7 +119,7 @@ function addRandomDetailModel(position, normal)
     -- align with surface
     pivot.rotation = quat.fromToRotation(vec3(0,1,0), normal)
     
-    local model = craft.entity()
+    local model = scene:entity()
     
     local mnum = 1
     while true do
@@ -137,12 +143,17 @@ function addRandomDetailModel(position, normal)
     return {t = pivot, rb = pivot:get(Rigidbody)}
 end
 
-function update()
-    craft.scene.sky:get(craft.renderer).material.skyColor = craft.scene.fogColor
-    craft.scene.sky:get(craft.renderer).material.horizonColor = craft.scene.fogColor
+function update(dt)
+    scene:update(dt)
+
+    scene.sky:get(craft.renderer).material.skyColor = scene.fogColor
+    scene.sky:get(craft.renderer).material.horizonColor = scene.fogColor
 end
 
 function draw()
+    update(DeltaTime)
+
+    scene:draw()
 end
 
 function PrintExplanation()
