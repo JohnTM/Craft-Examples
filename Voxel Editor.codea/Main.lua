@@ -12,7 +12,7 @@ function setup()
     craft.scene.sky.active = false
 
     -- Create a volume for rendering our voxel model
-    volumeEntity = craft.entity()
+    volumeEntity = scene:entity()
     volume = volumeEntity:add(craft.volume, 5, 5, 5)
     sx, sy, sz = volume:size()
 

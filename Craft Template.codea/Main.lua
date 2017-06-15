@@ -15,7 +15,7 @@ end
 
 -- Called automatically by codea 
 function draw()
-	update(DelatTime)
+	update(DeltaTime)
 	
 	-- Draw the scene
 	scene:draw()	
