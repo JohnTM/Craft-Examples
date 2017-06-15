@@ -16,9 +16,9 @@ function setup()
     player = scene:entity():add(Player, vec3(0,0,6))
     
     camera = scene.camera:get(craft.camera)
-    camera.main.ortho = true 
-    camera.main.orthoSize = 5
-    camera.rotation = quat.eulerAngles(45,0,25)    
+    camera.ortho = true 
+    camera.orthoSize = 5
+    camera.entity.rotation = quat.eulerAngles(45,0,25)    
     scene.sun.rotation = quat.eulerAngles(-45,0,65)
     
     sections = {}
@@ -83,8 +83,8 @@ function getLog(bounds)
 end
 
 function generateRoadSections()
-    local minRange = craft.scene.camera.z - 5
-    local maxRange = craft.scene.camera.z + 30
+    local minRange = scene.camera.z - 5
+    local maxRange = scene.camera.z + 30
     
     if #sections > 0 then
         if sections[#sections].entity.z < maxRange then
@@ -125,9 +125,9 @@ function update(dt)
     local pos = player.entity.worldPosition
     local cx = math.min( math.max( pos.x, ROAD_MIN_X + 4), ROAD_MAX_X - 14)
     
-    scene.camera.z = craft.scene.camera.z * 0.9 + (pos.z-5) * 0.1
+    scene.camera.z = scene.camera.z * 0.9 + (pos.z-5) * 0.1
     scene.camera.y = 10       
-    scene.camera.x = craft.scene.camera.x * 0.9 + cx * 0.1    
+    scene.camera.x = scene.camera.x * 0.9 + cx * 0.1    
 
 end
 
