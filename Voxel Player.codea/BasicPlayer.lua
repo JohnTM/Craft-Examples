@@ -223,11 +223,11 @@ end
 
 function BasicPlayer:digBlock(x,y)
     local origin, dir = self.camera:screenToRay(vec2(x, y))
-    craft.voxels:raycast(origin, dir, 100,
+    scene.voxels:raycast(origin, dir, 100,
     function(coord, id, face)
         if id and id ~= 0 then
-            if craft.voxels:get(coord).class.canDig then
-                craft.voxels:set(coord, 0)
+            if scene.voxels:get(coord).class.canDig then
+                scene.voxels:set(coord, 0)
                 sound(SOUND_HIT, 26744)
             end
             return true -- stop raycast
@@ -239,16 +239,16 @@ end
 
 function BasicPlayer:tapBlock(x,y)
     local origin, dir = self.camera:screenToRay(vec2(x, y))
-    craft.voxels:raycast(origin, dir, 100,
+    scene.voxels:raycast(origin, dir, 100,
     function(coord, id, face)
         if id and id ~= 0 then
-            local b = craft.voxels:get(coord)
+            local b = scene.voxels:get(coord)
 
             if b.interact then 
                 b:interact() 
             elseif self.slot and self.slot.block then
-                craft.voxels:set(coord + face, self.slot.block.id)     
-                local b2 = craft.voxels:get(coord + face)
+                scene.voxels:set(coord + face, self.slot.block.id)     
+                local b2 = scene.voxels:get(coord + face)
                 if b2.placed then
                     b2:placed(nil, face, self.camera.entity.forward)
                 end

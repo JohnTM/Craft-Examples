@@ -1,6 +1,6 @@
 function loadCave()
     
-    local cave = craft.voxels.blocks:new("Cave")
+    local cave = scene.voxels.blocks:new("Cave")
     cave.scripted = true
     cave:setTexture(ALL, "Blocks:Blank White")
     cave.tinted = true

@@ -3,31 +3,38 @@
 displayMode(FULLSCREEN)
 
 function setup()
+    scene = craft.scene()
+
     -- Setup camera and lighting
-    craft.scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(25,0,125)
 
     -- Set the scenes ambient lighting
-    craft.scene.ambientColor = color(127, 127, 127, 255)   
+    scene.ambientColor = color(127, 127, 127, 255)   
     
     allBlocks = blocks()    
     
     -- Setup voxel terrain
-    craft.voxels:resize(vec3(5,1,5))      
-    craft.voxels.coordinates = vec3(0,0,0)
+    scene.voxels:resize(vec3(5,1,5))      
+    scene.voxels.coordinates = vec3(0,0,0)
     
     -- Create ground put of grass
-    craft.voxels:fill("Grass")
-    craft.voxels:box(0,10,0,16*5,10,16*5)
-    craft.voxels:fill("Dirt")
-    craft.voxels:box(0,0,0,16*5,9,16*5)
+    scene.voxels:fill("Grass")
+    scene.voxels:box(0,10,0,16*5,10,16*5)
+    scene.voxels:fill("Dirt")
+    scene.voxels:box(0,0,0,16*5,9,16*5)
 
-    player = craft.entity():add(BasicPlayer, craft.camera.main, 40, 20, 40)
+    player = scene:entity():add(BasicPlayer, craft.camera.main, 40, 20, 40)
 
 end
 
+function update(dt)
+    scene:update(dt)
+end
+
 function draw()
-    if player then 
-        player:draw()
-    end
+    update(DeltaTime)
+
+    scene:draw()
+    player:draw()
 end
 
