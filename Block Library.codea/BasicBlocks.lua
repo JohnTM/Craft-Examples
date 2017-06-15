@@ -121,7 +121,7 @@ function basicBlocks()
     soundb.tinted = true
     soundb.scripted = true
 
-    function soundb:newd()
+    function soundb:created()
         local x,y,z = self:xyz()
         math.randomseed = x * y * z
         local c =color(math.random(128,255), math.random(128,255), math.random(128,255))

@@ -18,7 +18,7 @@ function fence(name, texture)
         self.voxels:updateBlock(x+1,y,z,0)        
     end
     
-    function fence:newd()
+    function fence:created()
         self:triggerUpdate()
     end
     

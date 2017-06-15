@@ -3,7 +3,7 @@ function testDynamicBlock()
     test.dynamic = true
     test.geometry = TRANSPARENT
     
-    function test:newd()
+    function test:created()
         e = self.entity
         self.model = scene:entity()
         self.model.parent = e

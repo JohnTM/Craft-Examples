@@ -3,7 +3,7 @@ function chest(capacity)
     chest.dynamic = true
     chest.geometry = TRANSPARENT
     
-    function chest:newd()
+    function chest:created()
         e = self.entity
         self.base = scene:entity()
         self.base.parent = e
