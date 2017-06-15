@@ -23,7 +23,7 @@ function setup()
     scene.voxels:fill("Dirt")
     scene.voxels:box(0,0,0,16*5,9,16*5)
 
-    player = scene:entity():add(BasicPlayer, craft.camera.main, 40, 20, 40)
+    player = scene:entity():add(BasicPlayer, scene.camera:get(craft.camera), 40, 20, 40)
 
 end
 

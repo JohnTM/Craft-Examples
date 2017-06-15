@@ -51,7 +51,7 @@ function setup()
     local baseColor2 = getColor(baseHeight-1)
     for i = 1,baseHeight do
         local c = baseColor:mix(baseColor2, 1.0 - (i-1.0)/(baseHeight-1))
-        local base = craft.entity():add(Platform, vec3(0,i-1,0), size, c, false, direction)
+        local base = scene:entity():add(Platform, vec3(0,i-1,0), size, c, false, direction)
         table.insert(stack, base)
     end
     
@@ -122,7 +122,7 @@ function spawnNextPlatform()
     local spawnPos = axes[direction] * -10 + vec3(0,1,0) * height
     spawnPos[prevDirection] = stack[#stack].entity.position[prevDirection]
     
-    local base = craft.entity():add(Platform,
+    local base = scene:entity():add(Platform,
                                     spawnPos, 
                                     size, 
                                     nextColor,

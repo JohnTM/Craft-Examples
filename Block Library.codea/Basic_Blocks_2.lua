@@ -8,7 +8,7 @@ function testDynamicBlock()
         self.model = scene:entity()
         self.model.parent = e
         self.model.position = vec3(0.5, 0.5, 0.5)
-        local r = self.model:add(craft.renderer, craft.mesh.icoSphere(0.4,1,true))
+        local r = self.model:add(craft.renderer, craft.mesh.icosphere(0.4,1,true))
         r.material = craft.material("Materials:Specular")
     end
     

@@ -80,7 +80,7 @@ function BasicPlayer:init(entity, camera, x, y, z)
     self.camera.entity.position = vec3(0,0.85,0)
     
     
-    self.fpsTouch = craft.scene.camera:add(FirstPersonTouch, 0.6, 5,
+    self.fpsTouch = self.camera.entity:add(FirstPersonTouch, 0.6, 5,
     {
         tapped = function(t)
             self:tapBlock(t.x, t.y)
@@ -114,10 +114,10 @@ end
 function BasicPlayer:setFlying(flying)
     self.flying = flying
     if self.flying then
-        craft.physics.gravity = vec3(0,0,0)
+        scene.physics.gravity = vec3(0,0,0)
         self.rb.linearDamping = 0.9
     else
-        craft.physics.gravity = vec3(0,-14.8,0)
+        scene.physics.gravity = vec3(0,-14.8,0)
     end
 end
 
@@ -139,13 +139,13 @@ function BasicPlayer:update()
         moveDir.x = moveDir.x + 1
     end
     
-    local hit1 = craft.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.52, 0.48, ~0, ~BasicPlayer.GROUP)
+    local hit1 = scene.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.52, 0.48, ~0, ~BasicPlayer.GROUP)
     
     if hit1 and hit1.normal.y > 0.5 then
         self.grounded = true
     end
     
-    local hit2 = craft.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.5, 0.52, ~0, ~BasicPlayer.GROUP)
+    local hit2 = scene.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.5, 0.52, ~0, ~BasicPlayer.GROUP)
     if hit2 and hit2.normal.y < 0.5 and moveDir.z == 1 then
         self:jump()
     end
