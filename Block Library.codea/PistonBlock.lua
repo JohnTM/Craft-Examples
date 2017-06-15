@@ -5,13 +5,13 @@ function piston()
     
     -- Helper function to move a block
     local function moveBlock(x,y,z,u,v,w)
-        local id, state = craft.voxels:get(x,y,z, BLOCK_ID, BLOCK_STATE)
-        craft.voxels:set(u,v,w, BLOCK_ID, id, BLOCK_STATE, state)
-        craft.voxels:set(x,y,z, 0)
+        local id, state = scene.voxels:get(x,y,z, BLOCK_ID, BLOCK_STATE)
+        scene.voxels:set(u,v,w, BLOCK_ID, id, BLOCK_STATE, state)
+        scene.voxels:set(x,y,z, 0)
     end
     
     -- Block representing the piston's pusher
-    local pusher = craft.block.create("Pusher")
+    local pusher = scene.voxels.blocks.create("Pusher")
     pusher.setTexture(ALL, "Blocks:Wood")  
     pusher.scripted = true
     pusher.geometry = TRANSPARENT   
@@ -45,7 +45,7 @@ function piston()
     end
     
     
-    local piston = craft.block.create("Piston")  
+    local piston = scene.voxels.blocks.create("Piston")  
     piston.setTexture(ALL, "Blocks:Stone")
     piston.geometry = TRANSPARENT
     piston.scripted = true    

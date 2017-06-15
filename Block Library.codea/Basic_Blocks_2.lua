@@ -1,11 +1,11 @@
 function testDynamicBlock()
-    local test = craft.block.create("Test")
+    local test = scene.voxels.blocks.create("Test")
     test.dynamic = true
     test.geometry = TRANSPARENT
     
     function test:created()
         e = self.entity
-        self.model = craft.entity()
+        self.model = scene:entity()
         self.model.parent = e
         self.model.position = vec3(0.5, 0.5, 0.5)
         local r = self.model:add(craft.renderer, craft.mesh.icoSphere(0.4,1,true))
@@ -20,7 +20,7 @@ function testDynamicBlock()
 end
 
 function signBlock()
-    local sign = craft.block.create("Sign")
+    local sign = scene.voxels.blocks.create("Sign")
     sign.setTexture(ALL, "Blocks:Wood")
     sign.scripted = true
     sign.geometry = TRANSPARENT
@@ -77,7 +77,7 @@ function signBlock()
 end
     
 function stairsBlock(name, texture)
-    local stairs = craft.block.create(name)
+    local stairs = scene.voxels.blocks.create(name)
     stairs.setTexture(ALL, texture)
     stairs.geometry = TRANSPARENT
     stairs.scripted = true

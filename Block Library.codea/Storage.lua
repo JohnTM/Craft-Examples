@@ -1,18 +1,18 @@
 function chest(capacity)
-    local chest = craft.block.create("Chest")
+    local chest = scene.voxels.blocks.create("Chest")
     chest.dynamic = true
     chest.geometry = TRANSPARENT
     
     function chest:created()
         e = self.entity
-        self.base = craft.entity()
+        self.base = scene:entity()
         self.base.parent = e
         self.base.position = vec3(0.5, 0.3, 0.5)
         local r = self.base:add(craft.renderer, craft.mesh.cube(vec3(0.8,0.6,0.8)))
         r.material = craft.material("Materials:Specular")
         r.material.diffuse = color(133, 79, 30, 255)
         
-        self.top = craft.entity()
+        self.top = scene:entity()
         self.top.parent = e
         self.top.position = vec3(0.1, 0.6, 0.1)
         local r2 = self.top:add(craft.renderer, craft.mesh.cube(vec3(0.8,0.2,0.8), vec3(0.4,0.1,0.4)))

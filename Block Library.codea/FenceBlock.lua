@@ -1,5 +1,5 @@
 function fence(name, texture)
-    local fence = craft.block.create(name)
+    local fence = scene.voxels.blocks.create(name)
     fence.setTexture(ALL, texture)
     fence.scripted = true
     fence.geometry = TRANSPARENT
