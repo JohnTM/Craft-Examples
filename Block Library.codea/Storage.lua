@@ -1,9 +1,9 @@
 function chest(capacity)
-    local chest = scene.voxels.blocks:create("Chest")
+    local chest = scene.voxels.blocks:new("Chest")
     chest.dynamic = true
     chest.geometry = TRANSPARENT
     
-    function chest:created()
+    function chest:newd()
         e = self.entity
         self.base = scene:entity()
         self.base.parent = e

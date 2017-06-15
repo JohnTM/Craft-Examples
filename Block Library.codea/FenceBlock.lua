@@ -1,5 +1,5 @@
 function fence(name, texture)
-    local fence = scene.voxels.blocks:create(name)
+    local fence = scene.voxels.blocks:new(name)
     fence.setTexture(ALL, texture)
     fence.scripted = true
     fence.geometry = TRANSPARENT
@@ -18,7 +18,7 @@ function fence(name, texture)
         self.voxels:updateBlock(x+1,y,z,0)        
     end
     
-    function fence:created()
+    function fence:newd()
         self:triggerUpdate()
     end
     
