@@ -30,7 +30,7 @@ function Grid:init(normal, origin, spacing, size, enabled)
 end
 
 function Grid:isVisible()
-    local camVec = craft.scene.camera.worldPosition - self.origin      
+    local camVec = scene.camera.worldPosition - self.origin      
     return self.enabled and self.normal:dot(camVec) > 0.0
 end
 
