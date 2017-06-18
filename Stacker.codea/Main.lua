@@ -81,6 +81,8 @@ end
 
 function draw()  
     update(DeltaTime)
+
+    scene:draw()
     
     if state == STATE_MENU then
         pushStyle()
@@ -99,8 +101,6 @@ function draw()
         text(score, WIDTH/2, HEIGHT * 0.75)
         popStyle()        
     end
-    
-    scene:draw()
 end
 
 function getColor(y)
