@@ -108,7 +108,7 @@ function update()
 
     -- For now the generator may override the basic scene lighting so we set it again here
     scene.ambientColor = color(80, 55, 84, 255)
-    scene.sun:get(craft.light).color = vec3(0.9,0.9,0.9)
+    scene.sun:get(craft.light).intensity = 0.9
     scene.sun.rotation = quat.eulerAngles(25,0,95)
 
     camera.nearPlane = 10

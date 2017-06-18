@@ -3,7 +3,7 @@
 function setup()
     scene = craft.scene()
 
-    scene.sun:get(craft.light).color = vec3(0.6, 0.6, 0.6)
+    scene.sun:get(craft.light).intensity = 0.6
     
     exclude = readText("Project:exclude") and json.decode(readText("Project:exclude")) or {}
     

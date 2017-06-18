@@ -16,7 +16,7 @@ function setup()
     skyColor = skyMat.skyColor
   
     scene.ambientColor = color(61, 61, 61, 255)
-    scene.sun:get(craft.light).color = vec3(0.75,0.75,0.75)
+    scene.sun:get(craft.light).intensity = 0.75
     scene.sun.rotation = quat.eulerAngles(25,0,125)
     scene.fogEnabled = false
     scene.fogNear = 5*16
