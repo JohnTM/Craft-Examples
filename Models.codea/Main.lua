@@ -4,24 +4,24 @@
 function setup()
     PrintExplanation()
     
-    
+    scene = craft.scene()
     
     AssetPack = "RacingKit"
     
     assets = assetList(AssetPack, "models")
     
     -- Setup camera and lighting
-    viewer = craft.scene.camera:add(OrbitViewer, vec3(0,0,0), 30, 20, 100)
-    craft.scene.ambientColor = color(61, 61, 61, 255)
-    craft.scene.sun:get(craft.light).color = vec3(0.75,0.75,0.75)
-    craft.scene.sun.rotation = quat.eulerAngles(25,0,125)
+    viewer = scene.camera:add(OrbitViewer, vec3(0,0,0), 30, 20, 100)
+    scene.ambientColor = color(61, 61, 61, 255)
+    scene.sun:get(craft.light).color = vec3(0.75,0.75,0.75)
+    scene.sun.rotation = quat.eulerAngles(25,0,125)
     
      
     models = {}
     
     local x, z = 0,0
     for k,v in pairs(assets) do    
-        local model = craft.entity()
+        local model = scene:entity()
         local mr = model:add(craft.renderer)  
 
         mr.mesh = craft.mesh(AssetPack..":"..v)
@@ -47,13 +47,15 @@ function setup()
     
 end
 
-function update() 
+function update(dt)
+    scene:update(dt)
+
     if ShowBounds then
         for k,v in pairs(models) do    
             local b = v:get(craft.renderer).mesh.bounds
             b2 = craft.bounds(b.min, b.max)
             b2:translate(v.position)
-            craft.debug:bounds(b2, color(255,255,255,255))
+            debug:bounds(b2, color(255,255,255,255))
         end
     end
     
@@ -65,6 +67,9 @@ end
 
 -- This function gets called once every frame
 function draw()
+    update(DeltaTime)
+    
+    scene:draw()
 end
 
 function PrintExplanation()

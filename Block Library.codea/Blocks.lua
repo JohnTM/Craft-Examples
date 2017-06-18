@@ -8,7 +8,7 @@ function blocks()
     chest(40)
         
     -- Get a list of all block types
-    local allBlocks = craft.voxels.blocks:all()
+    local allBlocks = scene.voxels.blocks:all()
     
     for k,v in pairs(allBlocks) do
         if v.hasIcon == true then

@@ -3,24 +3,25 @@ displayMode(FULLSCREEN)
 
 -- Use this function to perform your initial setup
 function setup()
+    scene = craft.scene()
     
     -- Generate icon for solid block type (using Block Library:BlockPreview)
-    solid = craft.voxels.blocks.Solid
+    solid = scene.voxels.blocks.Solid
     solid.static.icon = generateBlockPreview(solid)
 
-    craft.scene.ambientColor = color(77, 77, 77, 255)
-    craft.scene.sky.active = false
+    scene.ambientColor = color(77, 77, 77, 255)
+    scene.sky.active = false
 
     -- Create a volume for rendering our voxel model
-    volumeEntity = craft.entity()
+    volumeEntity = scene:entity()
     volume = volumeEntity:add(craft.volume, 5, 5, 5)
     sx, sy, sz = volume:size()
 
     -- Setup camera and lighting
-    craft.scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(25,0,125)
     
     -- Helper class for interactive camera
-    viewer = craft.camera.main.entity:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)
+    viewer = scene.camera:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)
     viewer.rx = 45
     viewer.ry = -45
     -- Make viewer handle touches 
@@ -157,7 +158,9 @@ function addSwatch(c)
     table.insert(swatches, swatch)
 end
 
-function update()    
+function update(dt) 
+    scene:update(dt)
+       
     for k,v in pairs(grids) do
         v:update()
     end
@@ -167,11 +170,15 @@ function update()
     end
     
     local r = shelf:right() / WIDTH
-    craft.camera.main:viewport(r,0,1.0-r,1)
+    scene.camera:get(craft.camera):viewport(r,0,1.0-r,1)
 end
 
 -- Perform 2D drawing (UI)
 function draw()
+    update(DeltaTime)
+    
+    scene:draw()
+    
     toolPanel:update()
     toolPanel:draw()
     
@@ -181,7 +188,7 @@ end
 
 -- Helper function for voxel raycasts
 function raycast(x,y, sides)
-    local origin, dir = craft.camera.main:screenToRay(vec2(x, y))
+    local origin, dir = scene.camera:get(craft.camera):screenToRay(vec2(x, y))
     
     local blockID = nil
     local blockCoord = nil

@@ -8,8 +8,8 @@ function generateBlockPreview(block)
         return img
     end
     
-    local camera = craft.camera.main
-    local sky = craft.scene.sky
+    local camera = scene.camera:get(craft.camera)
+    local sky = scene.sky
     
     local ortho = camera.ortho
     local orthoSize = camera.orthoSize
@@ -21,7 +21,7 @@ function generateBlockPreview(block)
     camera.clearColorEnabled = false
     sky.active = false
     
-    local volumeObj = craft.entity()
+    local volumeObj = scene:entity()
     local volume = volumeObj:add(craft.volume, 1, 1, 1)   
 
     if block.tinted then

@@ -53,14 +53,14 @@ planets.moon =
     {
         {
             image = readImage("Project:RockBrush2"),
-            count = {10,15},
-            size = {8.0, 10.0},
-            opacity = {0.125, 0.25}
+            count = {20,25},
+            size = {0.5, 10.0},
+            opacity = {0.125, 0.2}
         },
         {
             image = readImage("Project:CraterBrush"),
             count = {34,40},
-            size = {0.1, 1.0},
+            size = {0.1, 0.5},
             opacity = {0.15, 0.3}
         }
     }    

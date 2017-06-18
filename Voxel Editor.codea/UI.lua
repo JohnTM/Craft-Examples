@@ -270,7 +270,7 @@ function UI.Swatch:draw()
 
     spriteMode(CORNER)
   
-    local icon = craft.voxels.blocks:get("Solid").icon
+    local icon = scene.voxels.blocks:get("Solid").icon
       
     if self.selected then
         sprite(icon, 0, 0, self.frame.w, self.frame.h)
