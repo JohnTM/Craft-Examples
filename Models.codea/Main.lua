@@ -55,7 +55,7 @@ function update(dt)
             local b = v:get(craft.renderer).mesh.bounds
             b2 = craft.bounds(b.min, b.max)
             b2:translate(v.position)
-            debug:bounds(b2, color(255,255,255,255))
+            scene.debug:bounds(b2, color(255,255,255,255))
         end
     end
     
