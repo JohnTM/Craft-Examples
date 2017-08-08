@@ -11,6 +11,8 @@
 -- i.e. scene.camera:add(OrbitViewer)
 -------------------------------------------------------------------------------
 
+OrbitViewer = class()
+
 function OrbitViewer:init(entity, target, zoom, minZoom, maxZoom)
     self.entity = entity
     self.camera = entity:get(craft.camera)

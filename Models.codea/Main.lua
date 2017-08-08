@@ -92,7 +92,7 @@ function update(dt)
     if ShowBounds then
         for k,v in pairs(models) do    
             local b = v:get(craft.renderer).mesh.bounds
-            b2 = craft.bounds(b.min, b.max)
+            b2 = bounds(b.min, b.max)
             b2:translate(v.position)
             scene.debug:bounds(b2, color(255,255,255,255))
         end
