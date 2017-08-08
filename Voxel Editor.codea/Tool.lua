@@ -1,3 +1,4 @@
+-- The tools used to apply voxels in the ditor
 TOOL_ADD = 1
 TOOL_REPLACE = 2 
 TOOL_ERASE = 3

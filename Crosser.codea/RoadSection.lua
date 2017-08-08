@@ -1,3 +1,6 @@
+-- RoadSection
+-- A road section that can be configured with different randomised settings and obstacles
+
 RoadSection = class()
 
 ROAD_GRASS = 1

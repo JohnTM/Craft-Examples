@@ -1,3 +1,4 @@
+-- A TNT block
 function tnt()
     scene.voxels.blocks:addAsset("Dropbox:TNT")
     

@@ -1,4 +1,4 @@
--- Factory for a piston block (pushes other blocks 1 unit in a given direction)
+-- A piston block (pushes other blocks 1 unit in a given direction)
 function piston()
     -- By default all blocks can be pushed
     craft.block.static.canPush = true
@@ -158,8 +158,6 @@ function piston()
             self:set("on", false)         
         end         
     end
-    
-    
      
     return piston
 end

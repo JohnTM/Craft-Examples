@@ -1,3 +1,4 @@
+-- A storage block
 function chest(capacity)
     local chest = scene.voxels.blocks:new("Chest")
     chest.dynamic = true

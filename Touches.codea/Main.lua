@@ -1,4 +1,10 @@
--- Cameras
+-------------------------------------------------------------------------------
+-- Touches
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A simple library for handling touches.
+-------------------------------------------------------------------------------
 
 -- Use this function to perform your initial setup
 function setup()

@@ -33,7 +33,7 @@ function basicBlocks()
         return minFace
     end
     
-    -- By default all blocks can be dug, have icons and cam be placed by the player
+    -- By default all blocks can be dug, have icons and can be placed by the player
     -- Individual block types can override these defaults
     craft.block.static.canDig = true
     craft.block.static.hasIcon = true

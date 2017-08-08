@@ -1,3 +1,4 @@
+-- A basic UI library for the voxel editor (really just an early version of the UI library project)
 UI = {}
 
 UI.Panel = class()

@@ -1,30 +1,41 @@
+-------------------------------------------------------------------------------
 -- Lights
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- Demonstrates realtime lighting in Craft.
+-------------------------------------------------------------------------------
 
 -- Use this function to perform your initial setup
 function setup()
     print("Hello Lighting!")
     
+    -- Create and setup a basic scene
     scene = craft.scene()
+    -- Disable the sky and sun to emphasise our custom lights
     scene.sun.active = false  
     scene.sky.active = false
     scene.ambientColor = color(31, 31, 31, 255)
     
+    basicMat = craft.material("Materials:Standard")
+
     local floor = scene:entity()
     local r = floor:add(craft.renderer, craft.mesh.cube(vec3(50,0.1,50)))
-    r.material = craft.material("Materials:Standard")
+    r.material = basicMat
     floor.z = 5
     floor.y = -1
     
-    local sphere = scene:entity()
-    sphere.scale = vec3(0.5, 0.5, 0.5)
-    sphere.rotation = quat.eulerAngles(0,0,180)
-    r = sphere:add(craft.renderer, craft.mesh("Primitives:Monkey"))
-    r.material = craft.material("Materials:Standard")
+    -- Create a monkey model to shine our lights on
+    local monkey = scene:entity()
+    monkey.scale = vec3(0.625, 0.625, 0.625)
+    monkey.rotation = quat.eulerAngles(0,0,180)
+    r = monkey:add(craft.renderer, craft.mesh("Primitives:Monkey"))
+    r.material = basicMat
     r.material.roughness = 0.6
     r.material.metalness = 0.25
-    sphere.position = vec3(0, -0.25, 5)
+    monkey.position = vec3(0, 0.25, 5)
     
-    
+    -- Set up some parameters to control the lights
     parameter.color("Ambient", color(37, 37, 37))
     parameter.integer("Type", DIRECTIONAL, SPOT, SPOT)
     types = {"DIRECTIONAL", "POINT", "SPOT"}
@@ -37,11 +48,13 @@ function setup()
     parameter.boolean("Animate", true)
     
     lights = {}
+
+    -- Define the initial light colors
     colors = 
     {
-        color(255, 0, 0, 255),
-        color(0, 255, 21, 255),
-        color(0, 44, 255, 255)
+        color(255, 0, 190, 255),
+        color(0, 187, 255, 255),
+        color(255, 231, 0, 255)
     }
     
     for i = 1,3 do
@@ -51,6 +64,8 @@ function setup()
         light.color = colors[i]
         light.entity.y = 5
         light.entity.z = 5
+
+        -- Represent each of the lights with a basic material sphere (which is unlit)
         local r = light.entity:add(craft.renderer, craft.mesh.icosphere(0.1, 2))
         r.material = craft.material("Materials:Basic")
         r.material.diffuse = light.color
@@ -62,12 +77,13 @@ end
 function update(dt)
     scene:update(dt)
     
+    -- Update ambient lighting based on the parameter
     scene.ambientColor = Ambient
     
     for k,light in pairs(lights) do
         if Animate then
-            light.entity.x = math.cos(math.rad(90*ElapsedTime+(90*k)))
-            light.entity.z = 5 + math.cos(math.rad(90*ElapsedTime+(-45*k)))
+            light.entity.x = math.cos(math.rad(90*ElapsedTime*0.1+(90*k)))
+            light.entity.z = 5 + math.cos(math.rad(90*ElapsedTime*0.1+(-45*k)))
         end
             
         light.entity.y = Height

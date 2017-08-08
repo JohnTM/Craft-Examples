@@ -10,9 +10,8 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
-		<string>Notes</string>
 		<string>ViewModels</string>
-		<string>PlanetStep</string>
+		<string>PlanetGenerator</string>
 		<string>Main</string>
 	</array>
 	<key>Created</key>

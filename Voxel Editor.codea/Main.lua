@@ -24,7 +24,6 @@ function setup()
     viewer = scene.camera:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)
     viewer.rx = 45
     viewer.ry = -45
-    -- Make viewer handle touches 
 
     -- Tool handles editing the voxel volume
     tool = Tool()  

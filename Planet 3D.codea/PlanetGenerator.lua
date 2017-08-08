@@ -1,4 +1,11 @@
+-------------------------------------------------------------------------------
 -- Planet Generator
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- Generates a simple polygonal 3D planet and populates with some models from 
+-- the Nature asset pack by Kenney.
+-------------------------------------------------------------------------------
  
 function setup()
     scene = craft.scene()
@@ -7,6 +14,7 @@ function setup()
     
     exclude = readText("Project:exclude") and json.decode(readText("Project:exclude")) or {}
     
+    -- Paramters that save between project runs
     parameter.color("Color",readProjectColor("Color") or color(27, 149, 46, 255), function(c)
         saveProjectColor("Color", c)
     end)
@@ -28,6 +36,7 @@ function setup()
     bodies = {}
     planet = makePlanet()
     
+    -- Fog settings
     parameter.boolean("fog", scene.fogEnabled, function(b) scene.fogEnabled = b end)
     parameter.color("fogColor", scene.fogColor, function(c) scene.fogColor = c end)
     parameter.number("fogNear", 0, 100, scene.fogNear, function(n) scene.fogNear = n end)    
@@ -48,6 +57,7 @@ function checkClear(objects, p, r)
     return true
 end
 
+-- Generate a 3D planet
 function makePlanet()
 
     local planet = scene:entity()

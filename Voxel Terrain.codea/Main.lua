@@ -1,11 +1,14 @@
+-------------------------------------------------------------------------------
+-- Touches
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
 -- Voxel Terrain
+-------------------------------------------------------------------------------
 
 -- Use this function to perform your initial setup
-function setup()
-    
-    print([[
-    Voxel Terrain Example
-    ]])
+function setup()    
+    print("Voxel Terrain Example")
     
     scene = craft.scene()
     

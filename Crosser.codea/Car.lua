@@ -1,3 +1,11 @@
+-------------------------------------------------------------------------------
+-- Car
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A moving obstacle on road sections that can kill the player.
+-------------------------------------------------------------------------------
+
 Car = class()
 
 function Car:init(e, section, direction, speed)
@@ -7,6 +15,7 @@ function Car:init(e, section, direction, speed)
     self.pivot.parent = self.entity
     self.pivot.rotation = quat.eulerAngles(0,0,(direction == DIRECTION_LEFT) and 90 or -90)
     
+    -- Load and cache the car mesh
     if carMesh == nil then
         local temp = scene:entity()
         carMesh = temp:add(craft.volume, "Project:Car").mesh
@@ -27,21 +36,19 @@ function Car:init(e, section, direction, speed)
     self.speed = speed
     self.direction = direction
     
-    self.bounds = craft.bounds(vec3(), vec3())
-    
-    --self.box = scene:entity()
-    --self.box.parent = self.entity
-    --self.box:add(craft.renderer, Mesh.Cube(self.size)).material = Material("Materials:Standard")
-    
+    self.bounds = bounds(vec3(), vec3())
+
     self.pivot.scale = vec3(0.1,0.1,0.1)
 end
 
 function Car:update()
+    -- Update the car's position based on speed and direction
     self.entity.x = self.entity.x + self.direction * self.speed * DeltaTime
+
+    -- Update the bounds for collision
     self.bounds:set(self.size, self.entity.worldPosition - self.size * 0.5)
 
-    --craft.scene.debug:line(self.bounds.min, self.bounds.max, color(255,255,255))   
-    
+    -- Wrap the cars's position around when it goes off the edge of the screen
     if self.entity.x > ROAD_MAX_X then
         self.entity.x = ROAD_MIN_X
     elseif self.entity.x < ROAD_MIN_X then

@@ -1,7 +1,6 @@
 ------------------------------------------
 -- Planet Generator
 -- Written by John Millard
--- Last Edited - 13/6/2017
 ------------------------------------------
 -- Description:
 -- This is a highly advanced example showing how to generate an entire planet 

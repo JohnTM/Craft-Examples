@@ -9,8 +9,7 @@
 	<key>Author</key>
 	<string>John Millard</string>
 	<key>Buffer Order</key>
-	<array>
-		<string>BlockCreator</string>
+	<array>		
 		<string>UI</string>
 		<string>Grid</string>
 		<string>Tool</string>

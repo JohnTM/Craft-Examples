@@ -1,4 +1,13 @@
--- Use this function to perform your initial setup
+-------------------------------------------------------------------------------
+-- Planet Generator
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- This is used as a simple model viewer and a means to exclude certain 
+-- models from the Nature pack from being used in planet generation.
+-- This is stored inside a json text file in the project to be later read.
+-------------------------------------------------------------------------------
+
 function setup()
     scene = craft.scene()
 
@@ -9,7 +18,7 @@ function setup()
     model = scene:entity()
     mr = model:add(craft.renderer)  
     
-    saved(parameter.integer,"ModelNumber", 1, #models, 1, function(n)
+    saved(parameter.integer, "ModelNumber", 1, #models, 1, function(n)
         loadModel(n)
     end)
     

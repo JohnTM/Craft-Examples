@@ -1,4 +1,11 @@
--- Crossey
+-------------------------------------------------------------------------------
+-- Crosser
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A frogger style game that uses volumes made in the Voxel Editor project for 
+-- models.
+-------------------------------------------------------------------------------
 
 -- Constants
 TILE_SIZE = 1
@@ -15,6 +22,7 @@ function setup()
 
     player = scene:entity():add(Player, vec3(0,0,6))
     
+    -- Setup the camera for a 3/4 orthographic view
     camera = scene.camera:get(craft.camera)
     camera.ortho = true 
     camera.orthoSize = 5
@@ -25,6 +33,7 @@ function setup()
 
 end
 
+-- Adds a new road section generated at random
 function addRoadSection(t)
     local e = scene:entity()
     
@@ -37,6 +46,7 @@ function addRoadSection(t)
     return s
 end
 
+-- Gets the road section that intersects with the provided bounds
 function getSection(z)
     for k,v in pairs(sections) do
         if v.entity.z == math.floor(z) then
@@ -46,6 +56,7 @@ function getSection(z)
     return nil
 end
 
+-- Gets the tile that intersects with the provided bounds
 function getTile(p)
     local s = getSection(p.z)
     if s then 
@@ -54,6 +65,7 @@ function getTile(p)
     return nil
 end
 
+-- Gets the car that intersects with the provided bounds
 function getCar(bounds)
     local z = bounds.center.z
     for k,v in pairs(sections) do
@@ -68,6 +80,7 @@ function getCar(bounds)
     return nil
 end
 
+-- Gets the log that intersects with the provided bounds
 function getLog(bounds)
     local z = bounds.center.z
     for k,v in pairs(sections) do
@@ -82,6 +95,7 @@ function getLog(bounds)
     return nil
 end
 
+-- Generates road sections in the visible area around the player, while destroying ones that are no longer visible
 function generateRoadSections()
     local minRange = scene.camera.z - 5
     local maxRange = scene.camera.z + 30
@@ -122,6 +136,7 @@ function update(dt)
 
     generateRoadSections()
     
+    -- Smoothly update the camera position as the player moves
     local pos = player.entity.worldPosition
     local cx = math.min( math.max( pos.x, ROAD_MIN_X + 4), ROAD_MAX_X - 14)
     

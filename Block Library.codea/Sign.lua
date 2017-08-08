@@ -1,24 +1,4 @@
-function testDynamicBlock()
-    local test = scene.voxels.blocks:new("Test")
-    test.dynamic = true
-    test.geometry = TRANSPARENT
-    
-    function test:created()
-        e = self.entity
-        self.model = scene:entity()
-        self.model.parent = e
-        self.model.position = vec3(0.5, 0.5, 0.5)
-        local r = self.model:add(craft.renderer, craft.mesh.icosphere(0.4,1,true))
-        r.material = craft.material("Materials:Specular")
-    end
-    
-    function test:update()
-        self.model.rotation = quat.eulerAngles(ElapsedTime * 90, ElapsedTime * 90, ElapsedTime * 90)
-    end
-    
-    return test
-end
-
+-- The sign block
 function signBlock()
     local sign = scene.voxels.blocks:new("Sign")
     sign.setTexture(ALL, "Blocks:Wood")

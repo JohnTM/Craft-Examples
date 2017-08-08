@@ -23,7 +23,6 @@ function generateTerrain(chunk)
     local b2 = blend2D(b1,cliffs(),0.15,0.5, 0.2)  
     local flat = craft.noise.const(-0.2)  
     n = warp(n,cache2D(riverBed(b1)))
-    --n = liths(n)
     n = river(n)
     
     chunk:setWithNoise(n)
@@ -213,7 +212,7 @@ function rollingPlains()
     return hills(10, 0, 0.25, 3)
 end
 
--- take two noise functions and split based on elevation
+-- Take two noise functions and split based on elevation
 function split(a,b,depth)
     depth = depth or 64
     
@@ -226,7 +225,7 @@ function split(a,b,depth)
     return s
 end
 
--- warp one noise function using others
+-- Warp one noise function using others
 function warp(input, d1, d2, d3)
 
 	if d1 and d2 and d3 then
@@ -252,7 +251,7 @@ function warp(input, d1, d2, d3)
 	end
 end
 
--- generic hills (height map style)
+-- Generic hills (height map style)
 function hills(height, offset, frequency, octaves)
 
 	height = height or 10
@@ -273,10 +272,7 @@ function hills(height, offset, frequency, octaves)
     local shapeFinal = craft.noise.scaleOffset()
     shapeFinal:setSource(0, shape2D)
     shapeFinal.scale = -heightNorm * 0.5
-    shapeFinal.offset = -heightNorm - offset/cy ---heightNorm*2   
-    --[[
-    return shapeFinal
-    --]]
+    shapeFinal.offset = -heightNorm - offset/cy 
     
     return shapeFinal
 end

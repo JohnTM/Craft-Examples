@@ -1,8 +1,17 @@
+-------------------------------------------------------------------------------
+-- Tree
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description
+-- An obstacle on grassy road sections.
+-------------------------------------------------------------------------------
+
 Tree = class()
 
 function Tree:init(e)
     self.entity = e
 
+    -- Load and cache the tree mesh
     if treeMesh == nil then
         local temp = scene:entity()
         treeMesh = temp:add(craft.volume, "Project:Tree").mesh

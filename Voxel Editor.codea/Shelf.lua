@@ -1,3 +1,4 @@
+-- The shelf used to manipulate tool settings and access commands, such as UNDO
 Shelf = class(UI.Panel)
 
 function Shelf:init()

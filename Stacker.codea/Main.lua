@@ -1,8 +1,11 @@
----------------------------------------------------------
--- **** Stacker ****
--- A basic 3D stacking game
--- Learn about basic shapes, physics and camera usage
----------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Stacker
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A basic 3D stacking game.
+-- Learn about basic shapes, physics and camera usage.
+-------------------------------------------------------------------------------
 
 displayMode(FULLSCREEN)
 
@@ -81,7 +84,7 @@ end
 
 function draw()  
     update(DeltaTime)
-
+    
     scene:draw()
     
     if state == STATE_MENU then
@@ -101,6 +104,7 @@ function draw()
         text(score, WIDTH/2, HEIGHT * 0.75)
         popStyle()        
     end
+
 end
 
 function getColor(y)
