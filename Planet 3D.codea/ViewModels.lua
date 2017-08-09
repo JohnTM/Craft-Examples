@@ -1,13 +1,24 @@
--- Use this function to perform your initial setup
+-------------------------------------------------------------------------------
+-- Planet Generator
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- This is used as a simple model viewer and a means to exclude certain 
+-- models from the Nature pack from being used in planet generation.
+-- This is stored inside a json text file in the project to be later read.
+-------------------------------------------------------------------------------
+
 function setup()
+    scene = craft.scene()
+
     models = assetList("Nature", "models")
     
-    viewer = craft.scene.camera:add(OrbitViewer)
+    viewer = scene.camera:add(OrbitViewer)
     
-    model = craft.entity()
+    model = scene:entity()
     mr = model:add(craft.renderer)  
     
-    saved(parameter.integer,"ModelNumber", 1, #models, 1, function(n)
+    saved(parameter.integer, "ModelNumber", 1, #models, 1, function(n)
         loadModel(n)
     end)
     
@@ -38,17 +49,21 @@ function loadModel(modelNumber)
     model.position = vec3(-bounds.center.x,0,-bounds.center.z) 
 end
 
-function update() 
+function update(dt) 
+    scene:update(dt)
 end
 
 -- This function gets called once every frame
 function draw()
+    update(DeltaTime)
+    
+    scene:draw()
 end
 
 function PrintExplanation()
     output.clear()
     print("Loading models is easy, simply create an entity and add a MeshRenderer.")
-    print("Set the mesh using Mesh.Model(asset)")
+    print("Set the mesh using craft.mesh(asset)")
     print("In this example we have used assetList to get all models from the nature pack")
     print("Models will try to load a material if there is one, otherwise a blank material will be used.")
 end

@@ -1,7 +1,10 @@
----------------------------------------------------------
--- **** Platform ****
+-------------------------------------------------------------------------------
+-- Platform
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
 -- A single platform component, attach to an entity
----------------------------------------------------------
+-------------------------------------------------------------------------------
 
 Platform = class()
 
@@ -46,7 +49,7 @@ function Platform:bounds(dir)
 end
 
 function Platform:spawnComboEffect()
-    self.effect = craft.entity()
+    self.effect = scene:entity()
     self.effectRenderer = self.effect:add(craft.renderer)
     local m = craft.mesh.cube(vec3(1, 0, 1))
     self.effectRenderer.mesh = m
@@ -117,7 +120,7 @@ function Platform:drop(previous)
         local newSize = vec3(self.size:unpack())
         newSize[self.direction] = length2
         
-        local chip = craft.entity()
+        local chip = scene:entity()
         chip.position = newPos
         local r = chip:add(craft.renderer, craft.mesh.cube(newSize))
         r.material = self.r.material

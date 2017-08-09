@@ -1,3 +1,4 @@
+-- A reusable grid class for drawing the voxel editor grid
 Grid = class()
 
 function Grid:init(normal, origin, spacing, size, enabled)
@@ -22,15 +23,16 @@ function Grid:init(normal, origin, spacing, size, enabled)
         self.axes2 = {1, 2, 3}      
     end
     
-    self.entity = craft.entity()
+    self.entity = scene:entity()
     self.r = self.entity:add(craft.renderer, craft.mesh.cube(vec3(1,1,1), vec3(0.5,0.5,0.5)))
     self.r.material = craft.material("Materials:Specular")
     self.r.material.blendMode = NORMAL
     self:modified()
 end
 
+-- Checks if the grid is visible based on where the camera is pointed
 function Grid:isVisible()
-    local camVec = craft.scene.camera.worldPosition - self.origin      
+    local camVec = scene.camera.worldPosition - self.origin      
     return self.enabled and self.normal:dot(camVec) > 0.0
 end
 
@@ -42,6 +44,7 @@ function Grid:modified()
         
     self.r.material.map = self.img
     
+    -- Pre-render the grid to an image to make it look nicer (anti-aliasing)
     setContext(self.img)
     background(0,0,0,0)
     pushStyle()

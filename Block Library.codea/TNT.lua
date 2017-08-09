@@ -1,7 +1,8 @@
+-- A TNT block
 function tnt()
-    craft.voxels.blocks:addAsset("Dropbox:TNT")
+    scene.voxels.blocks:addAsset("Dropbox:TNT")
     
-    local tnt = craft.block.create("TNT")
+    local tnt = scene.voxels.blocks:new("TNT")
     tnt.setTexture(ALL, "Dropbox:TNT")
     tnt.scripted = true
     

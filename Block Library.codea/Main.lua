@@ -1,23 +1,30 @@
+-------------------------------------------------------------------------------
+-- Block Library
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- This project contains the shared block library for Codea.
+-- Add this project as a dependency and call the function blocks() to make use 
+-- of it in your own voxel-based projects.
+-- Run this project to see a preview of each block type
+-------------------------------------------------------------------------------
+
 displayMode(FULLSCREEN)
 
--- Block Library
--- This project contains the shared block library for Codea.
--- Add this project as a dependency and call the function basicBlocks() 
--- to make use of it in your own voxel-based projects
--- Run this project to see a preview of each block type
-
 function setup()
+    scene = craft.scene()
+
     -- Setup camera and lighting
-    craft.scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(25,0,125)
 
     -- Set the scenes ambient lighting
-    craft.scene.ambientColor = color(127, 127, 127, 255)   
+    scene.ambientColor = color(127, 127, 127, 255)   
     
     allBlocks = blocks()
     
     -- Setup voxel terrain
-    craft.voxels:resize(vec3(5,1,5))      
-    craft.voxels.coordinates = vec3(0,0,0)
+    scene.voxels:resize(vec3(5,1,5))      
+    scene.voxels.coordinates = vec3(0,0,0)
     
     
     -- Place block pyramid
@@ -33,7 +40,7 @@ function setup()
         for j = 1,i do
             local bt = allBlocks[k]
             if bt then
-                craft.voxels:set(pos, bt.id)  
+                scene.voxels:set(pos, bt.id)  
                 pos.x = pos.x + 1
                 pos.z = pos.z + 1    
                 center = center + pos  
@@ -45,14 +52,14 @@ function setup()
     end
     
     -- Create ground put of grass
-    craft.voxels:fill("Grass")
-    craft.voxels:box(0,10,0,16*5,10,16*5)
-    craft.voxels:fill("Dirt")
-    craft.voxels:box(0,0,0,16*5,9,16*5)
+    scene.voxels:fill("Grass")
+    scene.voxels:box(0,10,0,16*5,10,16*5)
+    scene.voxels:fill("Dirt")
+    scene.voxels:box(0,0,0,16*5,9,16*5)
 
     -- Focus the camera on this location
     center = center / (#allBlocks-1)
-    player = craft.entity():add(BasicPlayer, craft.camera.main, 40+n, 20, 40)
+    player = scene:entity():add(BasicPlayer, scene.camera:get(craft.camera), 40+n, 20, 40)
 end
 
 
@@ -70,10 +77,14 @@ function nearestTriangle(num)
     return n
 end
 
-function update()
+function update(dt)
+    scene:update(dt)
 end
 
 function draw()
+    update(DeltaTime)
+
+    scene:draw()
     player:draw()
 end
 

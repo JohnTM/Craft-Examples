@@ -1,3 +1,11 @@
+-------------------------------------------------------------------------------
+-- Touches
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A touch management class that simplifies handling multiple touch reciever.
+-------------------------------------------------------------------------------
+
 local TouchHandler = class()
 
 function TouchHandler:init(target, priority, multiTouch)

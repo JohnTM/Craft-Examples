@@ -1,4 +1,11 @@
--- Crossey
+-------------------------------------------------------------------------------
+-- Crosser
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A frogger style game that uses volumes made in the Voxel Editor project for 
+-- models.
+-------------------------------------------------------------------------------
 
 -- Constants
 TILE_SIZE = 1
@@ -11,19 +18,24 @@ function setup()
     -- Use this to control which level to create
     --math.randomseed(1)
     
-    player = craft.entity():add(Player, vec3(0,0,6))
+    scene = craft.scene()
+
+    player = scene:entity():add(Player, vec3(0,0,6))
     
-    craft.camera.main.ortho = true 
-    craft.camera.main.orthoSize = 5
-    craft.scene.camera.rotation = quat.eulerAngles(45,0,25)    
-    craft.scene.sun.rotation = quat.eulerAngles(-45,0,65)
+    -- Setup the camera for a 3/4 orthographic view
+    camera = scene.camera:get(craft.camera)
+    camera.ortho = true 
+    camera.orthoSize = 5
+    camera.entity.rotation = quat.eulerAngles(45,0,25)    
+    scene.sun.rotation = quat.eulerAngles(-45,0,65)
     
     sections = {}
 
 end
 
+-- Adds a new road section generated at random
 function addRoadSection(t)
-    local e = craft.entity()
+    local e = scene:entity()
     
     if #sections > 0 then
         e.z = sections[#sections].entity.z + TILE_SIZE
@@ -34,6 +46,7 @@ function addRoadSection(t)
     return s
 end
 
+-- Gets the road section that intersects with the provided bounds
 function getSection(z)
     for k,v in pairs(sections) do
         if v.entity.z == math.floor(z) then
@@ -43,6 +56,7 @@ function getSection(z)
     return nil
 end
 
+-- Gets the tile that intersects with the provided bounds
 function getTile(p)
     local s = getSection(p.z)
     if s then 
@@ -51,6 +65,7 @@ function getTile(p)
     return nil
 end
 
+-- Gets the car that intersects with the provided bounds
 function getCar(bounds)
     local z = bounds.center.z
     for k,v in pairs(sections) do
@@ -65,6 +80,7 @@ function getCar(bounds)
     return nil
 end
 
+-- Gets the log that intersects with the provided bounds
 function getLog(bounds)
     local z = bounds.center.z
     for k,v in pairs(sections) do
@@ -79,9 +95,10 @@ function getLog(bounds)
     return nil
 end
 
+-- Generates road sections in the visible area around the player, while destroying ones that are no longer visible
 function generateRoadSections()
-    local minRange = craft.scene.camera.z - 5
-    local maxRange = craft.scene.camera.z + 30
+    local minRange = scene.camera.z - 5
+    local maxRange = scene.camera.z + 30
     
     if #sections > 0 then
         if sections[#sections].entity.z < maxRange then
@@ -114,20 +131,24 @@ function generateRoadSections()
     end    
 end
 
-function update()
+function update(dt)
+    scene:update(dt)
+
     generateRoadSections()
     
+    -- Smoothly update the camera position as the player moves
     local pos = player.entity.worldPosition
     local cx = math.min( math.max( pos.x, ROAD_MIN_X + 4), ROAD_MAX_X - 14)
     
-    craft.scene.camera.z = craft.scene.camera.z * 0.9 + (pos.z-5) * 0.1
-    craft.scene.camera.y = 10       
-    craft.scene.camera.x = craft.scene.camera.x * 0.9 + cx * 0.1    
+    scene.camera.z = scene.camera.z * 0.9 + (pos.z-5) * 0.1
+    scene.camera.y = 10       
+    scene.camera.x = scene.camera.x * 0.9 + cx * 0.1    
 
 end
 
 function draw()
- 
+    update(DeltaTime)
+    scene:draw()
 end
 
 function touched(touch)

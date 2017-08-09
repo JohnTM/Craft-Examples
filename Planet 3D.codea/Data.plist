@@ -5,19 +5,19 @@
 	<key>Color</key>
 	<string>[36.0,251.0,0.0,255.0]</string>
 	<key>Density</key>
-	<real>441.55844116210938</real>
+	<real>129.87013244628906</real>
 	<key>Detail</key>
-	<real>5</real>
+	<real>3</real>
 	<key>Force</key>
 	<real>45.454544067382812</real>
 	<key>Frequency</key>
-	<real>0.42012989521026611</real>
+	<real>0.29458874464035034</real>
 	<key>Height</key>
-	<real>0.095238097012042999</real>
+	<real>0.26839825510978699</real>
 	<key>ModelNumber</key>
-	<real>163</real>
+	<real>148</real>
 	<key>ModelScale</key>
-	<real>0.10000000149011612</real>
+	<real>0.24415583908557892</real>
 	<key>Models</key>
 	<string>§</string>
 	<key>RotateX</key>
@@ -25,9 +25,9 @@
 	<key>RotateY</key>
 	<real>-6783.5</real>
 	<key>Seed</key>
-	<real>153680</real>
+	<real>564935</real>
 	<key>Spacing</key>
-	<real>0.20714285969734192</real>
+	<real>0.67857140302658081</real>
 	<key>Wind</key>
 	<real>0.10822510719299316</real>
 	<key>lastStep</key>

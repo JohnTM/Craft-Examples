@@ -81,7 +81,7 @@ function BlockInventory:load(name)
         for k,v in pairs(self.slots) do
             local blockName = data.slots[v.index].block
             if blockName then
-                self:setBlock(v.index, craft.voxels.blocks:get(blockName))
+                self:setBlock(v.index, scene.voxels.blocks:get(blockName))
                 if v.index == selected then
                     self:setSelected(v)
                 end

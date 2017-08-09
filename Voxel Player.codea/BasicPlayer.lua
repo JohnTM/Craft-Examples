@@ -80,7 +80,7 @@ function BasicPlayer:init(entity, camera, x, y, z)
     self.camera.entity.position = vec3(0,0.85,0)
     
     
-    self.fpsTouch = craft.scene.camera:add(FirstPersonTouch, 0.6, 5,
+    self.fpsTouch = self.camera.entity:add(FirstPersonTouch, 0.6, 5,
     {
         tapped = function(t)
             self:tapBlock(t.x, t.y)
@@ -114,10 +114,10 @@ end
 function BasicPlayer:setFlying(flying)
     self.flying = flying
     if self.flying then
-        craft.physics.gravity = vec3(0,0,0)
+        scene.physics.gravity = vec3(0,0,0)
         self.rb.linearDamping = 0.9
     else
-        craft.physics.gravity = vec3(0,-14.8,0)
+        scene.physics.gravity = vec3(0,-14.8,0)
     end
 end
 
@@ -139,13 +139,13 @@ function BasicPlayer:update()
         moveDir.x = moveDir.x + 1
     end
     
-    local hit1 = craft.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.52, 0.48, ~0, ~BasicPlayer.GROUP)
+    local hit1 = scene.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.52, 0.48, ~0, ~BasicPlayer.GROUP)
     
     if hit1 and hit1.normal.y > 0.5 then
         self.grounded = true
     end
     
-    local hit2 = craft.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.5, 0.52, ~0, ~BasicPlayer.GROUP)
+    local hit2 = scene.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.5, 0.52, ~0, ~BasicPlayer.GROUP)
     if hit2 and hit2.normal.y < 0.5 and moveDir.z == 1 then
         self:jump()
     end
@@ -223,11 +223,11 @@ end
 
 function BasicPlayer:digBlock(x,y)
     local origin, dir = self.camera:screenToRay(vec2(x, y))
-    craft.voxels:raycast(origin, dir, 100,
+    scene.voxels:raycast(origin, dir, 100,
     function(coord, id, face)
         if id and id ~= 0 then
-            if craft.voxels:get(coord).class.canDig then
-                craft.voxels:set(coord, 0)
+            if scene.voxels:get(coord).class.canDig then
+                scene.voxels:set(coord, 0)
                 sound(SOUND_HIT, 26744)
             end
             return true -- stop raycast
@@ -239,16 +239,16 @@ end
 
 function BasicPlayer:tapBlock(x,y)
     local origin, dir = self.camera:screenToRay(vec2(x, y))
-    craft.voxels:raycast(origin, dir, 100,
+    scene.voxels:raycast(origin, dir, 100,
     function(coord, id, face)
         if id and id ~= 0 then
-            local b = craft.voxels:get(coord)
+            local b = scene.voxels:get(coord)
 
             if b.interact then 
                 b:interact() 
             elseif self.slot and self.slot.block then
-                craft.voxels:set(coord + face, self.slot.block.id)     
-                local b2 = craft.voxels:get(coord + face)
+                scene.voxels:set(coord + face, self.slot.block.id)     
+                local b2 = scene.voxels:get(coord + face)
                 if b2.placed then
                     b2:placed(nil, face, self.camera.entity.forward)
                 end

@@ -1,8 +1,11 @@
----------------------------------------------------------
--- **** Stacker ****
--- A basic 3D stacking game
--- Learn about basic shapes, physics and camera usage
----------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Stacker
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- A basic 3D stacking game.
+-- Learn about basic shapes, physics and camera usage.
+-------------------------------------------------------------------------------
 
 displayMode(FULLSCREEN)
 
@@ -16,17 +19,19 @@ PERFECT_THRESHOLD = 0.25 -- how close a drop needs to be to be considered perfec
 PLATFORM_SIZE = {10,1,10} -- initial size of the stack
 
 function setup()
+    scene = craft.scene()
+    
     -- Setup lighting and camera
-    craft.scene.ambientColor = color(127, 127, 127, 255)
-    craft.scene.sun.rotation = quat.eulerAngles(25,0,125)
-    craft.scene.sun:get(craft.light).color = vec3(0.75,0.75,0.75)
+    scene.ambientColor = color(127, 127, 127, 255)
+    scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun:get(craft.light).intensity = 0.75
     
     -- Adjust the skybox
-    local skyMat = craft.scene.sky:get(craft.renderer).material
+    local skyMat = scene.sky:get(craft.renderer).material
     skyMat.horizonColor = color(0, 0, 0, 255)
     
     -- Use a fixed angle and orthographic view
-    camera = craft.camera.main
+    camera = scene.camera:get(craft.camera)
     camera.ortho = true
     camera.orthoSize = 14
     camera.entity.rotation = quat.eulerAngles(45,0,45)
@@ -51,7 +56,7 @@ function setup()
     local baseColor2 = getColor(baseHeight-1)
     for i = 1,baseHeight do
         local c = baseColor:mix(baseColor2, 1.0 - (i-1.0)/(baseHeight-1))
-        local base = craft.entity():add(Platform, vec3(0,i-1,0), size, c, false, direction)
+        local base = scene:entity():add(Platform, vec3(0,i-1,0), size, c, false, direction)
         table.insert(stack, base)
     end
     
@@ -62,7 +67,9 @@ function setup()
     comboEffectMaterial.emissive = color(255, 255, 255, 255)         
 end
 
-function update()
+function update(dt)
+    scene:update(dt)
+    
     local target = vec3(0,height,0) - camera.entity.forward * 30
     
     if state == STATE_MENU then
@@ -76,6 +83,10 @@ function update()
 end
 
 function draw()  
+    update(DeltaTime)
+    
+    scene:draw()
+    
     if state == STATE_MENU then
         pushStyle()
         font("SourceSansPro-Bold")
@@ -93,6 +104,7 @@ function draw()
         text(score, WIDTH/2, HEIGHT * 0.75)
         popStyle()        
     end
+
 end
 
 function getColor(y)
@@ -122,7 +134,7 @@ function spawnNextPlatform()
     local spawnPos = axes[direction] * -10 + vec3(0,1,0) * height
     spawnPos[prevDirection] = stack[#stack].entity.position[prevDirection]
     
-    local base = craft.entity():add(Platform,
+    local base = scene:entity():add(Platform,
                                     spawnPos, 
                                     size, 
                                     nextColor,

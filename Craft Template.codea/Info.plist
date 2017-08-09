@@ -10,26 +10,11 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
-		<string>BlockPreview</string>
-		<string>BasicBlocks</string>
-		<string>Sign</string>
-		<string>FenceBlock</string>
-		<string>PistonBlock</string>
-		<string>Storage</string>
-		<string>TNT</string>
-		<string>Blocks</string>
 		<string>Main</string>
 	</array>
 	<key>Dependencies</key>
-	<array>
-		<string>Touches</string>
-		<string>Cameras</string>
-		<string>UI</string>
-		<string>Voxel Player</string>
-	</array>
+	<array/>
 	<key>Description</key>
 	<string>No description available</string>
-	<key>Icon</key>
-	<string>Icon.png</string>
 </dict>
 </plist>

@@ -1,3 +1,6 @@
+-- RoadSection
+-- A road section that can be configured with different randomised settings and obstacles
+
 RoadSection = class()
 
 ROAD_GRASS = 1
@@ -31,7 +34,7 @@ function RoadSection:init(e, t)
         for k,v in pairs(self.tiles) do
             local p = math.random()
             if p < 0.125 then
-                local tree = craft.entity()
+                local tree = scene:entity()
                 tree:add(Tree)
                 tree.parent = self.entity
                 tree.z = 0
@@ -92,7 +95,7 @@ function RoadSection:getTile(x)
 end
 
 function RoadSection:spawnCar()
-    local car = craft.entity()
+    local car = scene:entity()
     local c = car:add(Car, self, self.direction, self.speed)
     car.parent = self.entity
     
@@ -110,7 +113,7 @@ function RoadSection:spawnCar()
 end
 
 function RoadSection:spawnLog(x)
-    local log = craft.entity()
+    local log = scene:entity()
     local c = log:add(Log, math.floor(math.random(1,4)), self.direction, self.speed)
     log.parent = self.entity
     

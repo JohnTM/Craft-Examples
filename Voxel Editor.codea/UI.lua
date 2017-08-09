@@ -1,3 +1,4 @@
+-- A basic UI library for the voxel editor (really just an early version of the UI library project)
 UI = {}
 
 UI.Panel = class()
@@ -270,7 +271,7 @@ function UI.Swatch:draw()
 
     spriteMode(CORNER)
   
-    local icon = craft.voxels.blocks:get("Solid").icon
+    local icon = scene.voxels.blocks:get("Solid").icon
       
     if self.selected then
         sprite(icon, 0, 0, self.frame.w, self.frame.h)

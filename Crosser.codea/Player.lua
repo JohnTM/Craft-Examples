@@ -1,3 +1,11 @@
+-------------------------------------------------------------------------------
+-- Player
+-- Written by John Millard
+-------------------------------------------------------------------------------
+-- Description:
+-- Hops around the level in response to user interaction.
+-------------------------------------------------------------------------------
+
 Player = class()
 
 -- Player state constants
@@ -17,14 +25,15 @@ Player.models =
 function Player:init(e, p)
     self.entity = e
     self.size = vec3(0.4,0.6,0.4)
-    self.bounds = craft.bounds(vec3(0,0,0), vec3(0,0,0))
+    self.bounds = bounds(vec3(0,0,0), vec3(0,0,0))
     
-    self.model = craft.entity()
+    -- Load a random player model
+    self.model = scene:entity()
     self.vm = self.model:add(craft.volume, 1,1,1)
     self.vm:load(Player.models[math.random(1,#Player.models)])
     
     -- Use a pivot so we can rotate the model around the center
-    self.pivot = craft.entity()
+    self.pivot = scene:entity()
     self.pivot.parent = self.entity
     self.model.parent = self.pivot
     self.entity.position = p
@@ -40,16 +49,18 @@ function Player:init(e, p)
     self.touchStart = vec2(0,0)
     self.touchEnd = vec2(0,0)
     
+    -- Animation variables
     self.squash = 0
     self.rotation = 180 
     self.jump = 0 
     
-    self.x = p.x
-    self.z = p.z
-    
+    -- Current position
     self.pos = p
+
+    -- The next position (used when jumping) 
     self.nextPos = p
     
+    -- The directions the player can move in (north, east, south, west)
     self.directions = 
     {
         vec2(0,1),
@@ -60,13 +71,15 @@ function Player:init(e, p)
 end
 
 function Player:update()
-
     if self.state == PLAYER_DEAD then
+        -- Scale the model if the player is squashed
         self.pivot.scale = vec3(1 + self.squash * 0.0025, 1 + self.squash * 0.0025, 1 - self.squash * 0.0025) * 0.05
         self.pivot.rotation = quat.eulerAngles(45,45,45)
     elseif self.state == PLAYER_DROWNED then
+        -- Drop the model if the player drowns
         self.entity.y = self.entity.y - 5 * DeltaTime 
     else
+        -- Animate the players rotation, stretch, squash and jump arc
         self.entity.position = self.pos * (1-self.jump) + self.nextPos * self.jump
         self.pivot.y = math.sin(self.jump * math.pi) * 0.75 -- self.squash * 0.0015
         self.pivot.scale = vec3(1 + self.squash * 0.0025, 1 - self.squash * 0.0025, 1 + self.squash * 0.0025) * 0.05
@@ -78,7 +91,6 @@ function Player:update()
         if car then
             self:killed(car)
         end
-    
     end
 end
 
@@ -91,9 +103,11 @@ function Player:killed(car)
     tween(1.0, self, {squash = 200.0}, tween.easing.cubicOut)      
 end
 
+-- Triggered at the end of a jump animation
 function Player:jumpEnded()
-    
     local s = getSection(self.nextPos.z)
+
+    -- The player landed in a river and not a log
     if s and s.type == ROAD_RIVER and self.log == nil then       
         self.state = PLAYER_DROWNED
         return
@@ -123,16 +137,19 @@ function Player:worldNextPos()
     return nextPos
 end
 
+-- This handles the players movement via swiping and tapping on the screen.
+-- There are a number of different states and edge-conditions to handle for
+-- swiping, cancelling swipes and tapping. 
 function Player:touched(touch)
-    
+    -- Reset the game when the player is dead and touches the screen
     if self.state == PLAYER_DEAD or self.state == PLAYER_DROWNED then
         if touch.state == ENDED then
             restart()
         end
     end
     
-    if self.state == PLAYER_JUMP then
-        
+    -- Allow the player to begin a new swipe while jumping
+    if self.state == PLAYER_JUMP then   
         if touch.state == BEGAN and self.touchID == nil then
             self.touchID = touch.id 
             self.touchStart.x = touch.x
@@ -140,9 +157,8 @@ function Player:touched(touch)
         elseif touch.state == ENDED and self.touchID == touch.id then
             self.touchID = nil
         end
-                 
-    elseif self.state == PLAYER_IDLE then
-        
+    -- Detect the beginning of a swipe
+    elseif self.state == PLAYER_IDLE then 
         if touch.state == BEGAN then
             self.touchID = touch.id 
             self.touchStart.x = touch.x
@@ -156,7 +172,7 @@ function Player:touched(touch)
             
             self.tid = tween(1.0, self, {squash = 100.0}, tween.easing.cubicOut)      
         end
-        
+    -- Continuation of a swipe (dragging)
     elseif self.state == PLAYER_DRAG and self.touchID == touch.id then
         self.touchEnd.x = touch.x
         self.touchEnd.y = touch.y  
@@ -164,6 +180,8 @@ function Player:touched(touch)
         local touchDir = (self.touchEnd - self.touchStart):normalize()
         local touchDist = self.touchStart:dist(self.touchEnd)
         
+        -- Determine which direction the swipe is in by comparing the direction 
+        -- of the swipe to the angles of the possible movement directions
         local mindot = 0
         local mindir = nil
         local r = 0
@@ -176,10 +194,9 @@ function Player:touched(touch)
                 r = (k-1) * 90
             end
         end 
-                     
-        if touch.state == MOVING then
-            
-        elseif touch.state == ENDED then
+                
+        -- When the touch for this swipe has ended we execute a jump
+        if touch.state == ENDED then
             self.touchID = nil
 
             if touchDist < 20 and touch.tapCount == 0 then
@@ -193,12 +210,13 @@ function Player:touched(touch)
                     r = 180
                 end
                 
+                -- Determine the next position for the player
                 self.nextPos = self.pos + vec3(mindir.x, 0, -mindir.y)  
                                     
                 local tile = getTile(self:worldNextPos())
                 
-                local newBounds = craft.bounds(self:worldNextPos() - self.size*0.5, 
-                                               self:worldNextPos() + self.size*0.5)
+                local newBounds = bounds(self:worldNextPos() - self.size*0.5, 
+                                         self:worldNextPos() + self.size*0.5)
                 local log = getLog(newBounds)
                 
                 if log then
@@ -227,6 +245,7 @@ function Player:touched(touch)
                     end
                 end
                 
+                -- The tile was empty so a jump can take place
                 if tile == 0 then
                     self.state = PLAYER_JUMP
                     self.jump = 0
@@ -245,6 +264,7 @@ function Player:touched(touch)
                     tween(0.25, self, {rotation = r})
                     
                     sound(SOUND_JUMP, 38926, math.random()*0.3 + 0.3)
+                -- The tile was blocked, so cancel the jump
                 else
                     self.nextPos = self.pos
                     
@@ -258,6 +278,5 @@ function Player:touched(touch)
                 
             end
         end
-
     end
 end
