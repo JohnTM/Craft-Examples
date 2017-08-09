@@ -26,7 +26,7 @@ function ui.image:init(params)
     end
     
     self:setImage(params.image)
-    self.mesh = mesh()
+    self.model = mesh()
 end
 
 function ui.image:setImage(img)
@@ -71,50 +71,50 @@ function ui.image:draw()
         if t > 0 or r > 0 or b > 0 or l > 0 then
             translate(self.frame.x, self.frame.y)
             
-            self.mesh:clear()
-            self.mesh.texture = self.img
+            self.model:clear()
+            self.model.texture = self.img
             
             local sx, sy = spriteSize(self.img)
 
             -- Top
-            local i = self.mesh:addRect(self.frame.w/2, self.frame.h - t/2, w - l - r, t)    
-            self.mesh:setRectTex(i, l/sx,(sy-t)/sy,(sx-l-r)/sx,t/sy)
+            local i = self.model:addRect(self.frame.w/2, self.frame.h - t/2, w - l - r, t)    
+            self.model:setRectTex(i, l/sx,(sy-t)/sy,(sx-l-r)/sx,t/sy)
             
             -- Top Right
-            i = self.mesh:addRect(self.frame.w - r/2, self.frame.h - t/2, r, t)    
-            self.mesh:setRectTex(i, (sx-r)/sx,(sy-t)/sy,r/sx,t/sy)            
+            i = self.model:addRect(self.frame.w - r/2, self.frame.h - t/2, r, t)    
+            self.model:setRectTex(i, (sx-r)/sx,(sy-t)/sy,r/sx,t/sy)            
             
             -- Right
-            i = self.mesh:addRect(self.frame.w - r/2, self.frame.h/2, r, h - t - b)    
-            self.mesh:setRectTex(i, (sx-r)/sx,t/sy,r/sx,(sy - t - b)/sy)         
+            i = self.model:addRect(self.frame.w - r/2, self.frame.h/2, r, h - t - b)    
+            self.model:setRectTex(i, (sx-r)/sx,t/sy,r/sx,(sy - t - b)/sy)         
             
             -- Bottom Right
-            i = self.mesh:addRect(self.frame.w - r/2, b/2, r, b)    
-            self.mesh:setRectTex(i, (sx-r)/sx,0,r/sx,b/sy)
+            i = self.model:addRect(self.frame.w - r/2, b/2, r, b)    
+            self.model:setRectTex(i, (sx-r)/sx,0,r/sx,b/sy)
             
             -- Bottom
-            local i = self.mesh:addRect(self.frame.w/2, b/2, w - l - r, b)    
-            self.mesh:setRectTex(i, l/sx,0,(sx-l-r)/sx,t/sy)         
+            local i = self.model:addRect(self.frame.w/2, b/2, w - l - r, b)    
+            self.model:setRectTex(i, l/sx,0,(sx-l-r)/sx,t/sy)         
             
             -- Bottom Left
-            i = self.mesh:addRect(l/2, b/2, l, b)    
-            self.mesh:setRectTex(i, 0,0,l/sx,b/sy)
+            i = self.model:addRect(l/2, b/2, l, b)    
+            self.model:setRectTex(i, 0,0,l/sx,b/sy)
             
             -- Left
-            i = self.mesh:addRect(l/2, self.frame.h/2, l, h - t - b)    
-            self.mesh:setRectTex(i, 0,t/sy,l/sx,(sy - t - b)/sy)         
+            i = self.model:addRect(l/2, self.frame.h/2, l, h - t - b)    
+            self.model:setRectTex(i, 0,t/sy,l/sx,(sy - t - b)/sy)         
             
             -- Top Left
-            i = self.mesh:addRect(l/2, self.frame.h - t/2, l, t)    
-            self.mesh:setRectTex(i, 0,(sy-t)/sy,l/sx,t/sy) 
+            i = self.model:addRect(l/2, self.frame.h - t/2, l, t)    
+            self.model:setRectTex(i, 0,(sy-t)/sy,l/sx,t/sy) 
             
             -- Middle
-            i = self.mesh:addRect(self.frame.w/2, self.frame.h/2, w-l-r, h-t-b)    
-            self.mesh:setRectTex(i, l/sx,b/sy,(sx-l-r)/sx,(sy-b-t)/sy)          
+            i = self.model:addRect(self.frame.w/2, self.frame.h/2, w-l-r, h-t-b)    
+            self.model:setRectTex(i, l/sx,b/sy,(sx-l-r)/sx,(sy-b-t)/sy)          
             
-            self.mesh:setColors(self.fill)
+            self.model:setColors(self.fill)
             
-            self.mesh:draw()
+            self.model:draw()
         else
             translate(self.frame.x + self.frame.w/2, 
                       self.frame.y + self.frame.h/2)

@@ -14,7 +14,7 @@ function Log:init(e, length, direction, speed)
     -- Load and cache the log mesh
     if logMesh == nil then
         local temp = scene:entity()
-        logMesh = temp:add(craft.volume, "Project:Log").mesh
+        logMesh = temp:add(craft.volume, "Project:Log").model
         logMeshCenter = logMesh.bounds.size * 0.5
         logScale = 1.0 / logMesh.bounds.size.x
         temp:destroy()

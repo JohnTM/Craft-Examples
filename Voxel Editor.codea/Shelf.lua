@@ -46,7 +46,7 @@ function Shelf:init()
     {
         UI.Button(0,0,75,30,"outline", function(b)
             b.selected = not b.selected
-            volume.mesh:getMaterial().showOutline = b.selected
+            volume.model:getMaterial().showOutline = b.selected
         end)
     })
     

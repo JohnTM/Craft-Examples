@@ -14,7 +14,7 @@ function Tree:init(e)
     -- Load and cache the tree mesh
     if treeMesh == nil then
         local temp = scene:entity()
-        treeMesh = temp:add(craft.volume, "Project:Tree").mesh
+        treeMesh = temp:add(craft.volume, "Project:Tree").model
         temp:destroy()
     end
        

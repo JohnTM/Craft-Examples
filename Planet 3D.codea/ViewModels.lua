@@ -44,8 +44,8 @@ function setup()
 end
 
 function loadModel(modelNumber)
-    mr.mesh = craft.model("Nature:"..models[modelNumber])
-    local bounds = mr.mesh.bounds
+    mr.model = craft.model("Nature:"..models[modelNumber])
+    local bounds = mr.model.bounds
     model.position = vec3(-bounds.center.x,0,-bounds.center.z) 
 end
 

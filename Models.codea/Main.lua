@@ -63,7 +63,7 @@ function loadModels(pack)
         local model = scene:entity()
         
         local mr = model:add(craft.renderer)  
-        mr.mesh = craft.model(pack..":"..v)
+        mr.model = craft.model(pack..":"..v)
 
         -- Tag the model for later
         model:add(Tag, pack..":"..v)
@@ -78,7 +78,7 @@ function loadModels(pack)
     for k,model in pairs(models) do    
         local mr = model:get(craft.renderer)  
 
-        local bounds = mr.mesh.bounds
+        local bounds = mr.model.bounds
         
         model.x = x - bounds.max.x
         model.z = z - bounds.offset.z
@@ -102,7 +102,7 @@ end
 
 function updateViewer()
     local m = models[ModelNumber]
-    local b = m:get(craft.renderer).mesh.bounds
+    local b = m:get(craft.renderer).model.bounds
     viewer.target = m.position + b.center
 end
 
@@ -111,7 +111,7 @@ function update(dt)
 
     if ShowBounds then
         for k,v in pairs(models) do    
-            local b = v:get(craft.renderer).mesh.bounds
+            local b = v:get(craft.renderer).model.bounds
             b2 = bounds(b.min, b.max)
             b2:translate(v.position)
             scene.debug:bounds(b2, color(255,255,255,255))

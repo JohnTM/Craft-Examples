@@ -19,7 +19,7 @@ function TerrainChunk:update()
     if self.thread then
         local status, result = coroutine.resume(self.thread, self)
         if result then
-            self.renderer.mesh = result
+            self.renderer.model = result
             self.thread = nil
         end
     end

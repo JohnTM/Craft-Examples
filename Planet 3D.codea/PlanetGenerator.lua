@@ -62,7 +62,7 @@ function makePlanet()
 
     local planet = scene:entity()
     local mr = planet:add(craft.renderer, craft.model.icosphere(3, Detail, true))
-    local chance = 1.0 / mr.mesh.vertexCount
+    local chance = 1.0 / mr.model.vertexCount
     
     local points = {}
     
@@ -72,22 +72,22 @@ function makePlanet()
     
     local p = vec3()
     local r = vec3()
-    for i = 1, mr.mesh.vertexCount do        
-        p:set(mr.mesh:position(i))
+    for i = 1, mr.model.vertexCount do        
+        p:set(mr.model:position(i))
         
         local n = noise:getValue(p.x, p.y, p.z)
         
         r:set(p:unpack()):mul(n * Height / r:len())
         p:add(r)
         
-        mr.mesh:position(i, p)
+        mr.model:position(i, p)
         
         if (i-1) % 3 == 0 then
             local c = 255 * (0.60 + math.abs(n) * 0.4)
             c = color(c,c,c,1.0)
-            mr.mesh:color(i, c)
-            mr.mesh:color(i+1, c)
-            mr.mesh:color(i+2, c)
+            mr.model:color(i, c)
+            mr.model:color(i+1, c)
+            mr.model:color(i+2, c)
         end
         
         if Density > 0 then
@@ -140,7 +140,7 @@ function addRandomDetailModel(position, normal)
     end  
      
     local mr = model:add(craft.renderer, craft.model("Nature:"..models[mnum]))
-    local bounds = mr.mesh.bounds
+    local bounds = mr.model.bounds
     local s = ModelScale
     model.parent = pivot
     model.position = vec3(-bounds.center.x * s, 0, -bounds.center.z * s)

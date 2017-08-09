@@ -52,7 +52,7 @@ function Platform:spawnComboEffect()
     self.effect = scene:entity()
     self.effectRenderer = self.effect:add(craft.renderer)
     local m = craft.model.cube(vec3(1, 0, 1))
-    self.effectRenderer.mesh = m
+    self.effectRenderer.model = m
     
     self.effectRenderer.material = comboEffectMaterial
     
@@ -98,7 +98,7 @@ function Platform:drop(previous)
         
         self.entity.position = newPos
         self.size[self.direction] = length1
-        self.r.mesh = craft.model.cube(self.size)
+        self.r.model = craft.model.cube(self.size)
         
         local angVel = vec3()
 

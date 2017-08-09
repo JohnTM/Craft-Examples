@@ -18,7 +18,7 @@ function Car:init(e, section, direction, speed)
     -- Load and cache the car mesh
     if carMesh == nil then
         local temp = scene:entity()
-        carMesh = temp:add(craft.volume, "Project:Car").mesh
+        carMesh = temp:add(craft.volume, "Project:Car").model
         carMeshCenter = carMesh.bounds.size * 0.5
         temp:destroy()
     end
