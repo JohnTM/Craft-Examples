@@ -61,7 +61,7 @@ end
 function makePlanet()
 
     local planet = scene:entity()
-    local mr = planet:add(craft.renderer, craft.mesh.icosphere(3, Detail, true))
+    local mr = planet:add(craft.renderer, craft.model.icosphere(3, Detail, true))
     local chance = 1.0 / mr.mesh.vertexCount
     
     local points = {}
@@ -139,7 +139,7 @@ function addRandomDetailModel(position, normal)
         end
     end  
      
-    local mr = model:add(craft.renderer, craft.mesh("Nature:"..models[mnum]))
+    local mr = model:add(craft.renderer, craft.model("Nature:"..models[mnum]))
     local bounds = mr.mesh.bounds
     local s = ModelScale
     model.parent = pivot

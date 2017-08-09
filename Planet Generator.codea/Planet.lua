@@ -33,7 +33,7 @@ function Planet:init(entity, radius, gridSize, maxLod, atmos)
     -- The ocean, rendered using a transparent icosphere
     self.oceanEntity = scene:entity()
     self.oceanEntity.parent = entity
-    self.ocean = self.oceanEntity:add(craft.renderer, craft.mesh.icosphere(1.0, 4, false))
+    self.ocean = self.oceanEntity:add(craft.renderer, craft.model.icosphere(1.0, 4, false))
     local s = self.radius + 10
     self.oceanEntity.scale = vec3(s,s,s)
     self.ocean.material = craft.material("Materials:Standard")
@@ -47,7 +47,7 @@ function Planet:init(entity, radius, gridSize, maxLod, atmos)
     if atmos then
         local atmosEntity = scene:entity()
         atmosEntity.parent = entity  
-        self.atmos = atmosEntity:add(craft.renderer, craft.mesh.icosphere(-self.radius -100, 3, false))
+        self.atmos = atmosEntity:add(craft.renderer, craft.model.icosphere(-self.radius -100, 3, false))
         self.atmos.material = craft.material("Project:Atmosphere")
         self.atmos.material.blendMode = ADDITIVE
         self.atmos.material.opacity = 0.5

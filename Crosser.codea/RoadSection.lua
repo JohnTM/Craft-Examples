@@ -81,7 +81,7 @@ function RoadSection:init(e, t)
        
     self.type = t
     
-    local mr = self.entity:add(craft.renderer, craft.mesh.cube(vec3(ROAD_WIDTH * TILE_SIZE, self.height, TILE_SIZE)))
+    local mr = self.entity:add(craft.renderer, craft.model.cube(vec3(ROAD_WIDTH * TILE_SIZE, self.height, TILE_SIZE)))
     mr.material = craft.material("Materials:Standard")
     mr.material.diffuse = c  
     

@@ -2,14 +2,14 @@
 
 -- Use this function to perform your initial setup
 function setup()
-    print("Hello World!")
+    print("Hello Cameras!")
 
     scene = craft.scene()
-    local m = craft.mesh("CastleKit:knightBlue")
+    local m = craft.model("CastleKit:knightBlue")
     model = scene:entity()
     model:add(craft.renderer, m)
     
-    scene.camera:add(OrbitViewer, vec3(0,0,0), 5, 5, 20)
+    scene.camera:add(OrbitViewer, vec3(0,5,0), 5, 10, 20)
 end
 
 function update(dt)

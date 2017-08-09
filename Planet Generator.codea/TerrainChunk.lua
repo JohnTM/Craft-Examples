@@ -31,7 +31,7 @@ function TerrainChunk:makeGridMesh()
     local r = self.planet.radius
     local r2 = r * math.sqrt(2) / 2
     
-    local m = craft.mesh()
+    local m = craft.model()
     
     m:resizeVertices((gs + 1) * (gs + 1))
     m:resizeIndices(gs * gs * 6)

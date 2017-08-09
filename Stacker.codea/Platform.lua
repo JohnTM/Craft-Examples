@@ -13,7 +13,7 @@ function Platform:init(e, position, size, col, moving, direction, distance)
     self.size = vec3(size:unpack())
 
     -- Setup renderer using cube mesh and specular material for basic shading
-    self.r = self.entity:add(craft.renderer, craft.mesh.cube(self.size))
+    self.r = self.entity:add(craft.renderer, craft.model.cube(self.size))
     self.r.material = craft.material("Materials:Specular")
     self.r.material.diffuse = col
     
@@ -51,7 +51,7 @@ end
 function Platform:spawnComboEffect()
     self.effect = scene:entity()
     self.effectRenderer = self.effect:add(craft.renderer)
-    local m = craft.mesh.cube(vec3(1, 0, 1))
+    local m = craft.model.cube(vec3(1, 0, 1))
     self.effectRenderer.mesh = m
     
     self.effectRenderer.material = comboEffectMaterial
@@ -98,7 +98,7 @@ function Platform:drop(previous)
         
         self.entity.position = newPos
         self.size[self.direction] = length1
-        self.r.mesh = craft.mesh.cube(self.size)
+        self.r.mesh = craft.model.cube(self.size)
         
         local angVel = vec3()
 
@@ -122,7 +122,7 @@ function Platform:drop(previous)
         
         local chip = scene:entity()
         chip.position = newPos
-        local r = chip:add(craft.renderer, craft.mesh.cube(newSize))
+        local r = chip:add(craft.renderer, craft.model.cube(newSize))
         r.material = self.r.material
 
         local rb = chip:add(craft.rigidbody, DYNAMIC)

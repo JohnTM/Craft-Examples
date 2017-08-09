@@ -20,7 +20,7 @@ function setup()
     basicMat = craft.material("Materials:Standard")
 
     local floor = scene:entity()
-    local r = floor:add(craft.renderer, craft.mesh.cube(vec3(50,0.1,50)))
+    local r = floor:add(craft.renderer, craft.model.cube(vec3(50,0.1,50)))
     r.material = basicMat
     floor.z = 5
     floor.y = -1
@@ -29,7 +29,7 @@ function setup()
     local monkey = scene:entity()
     monkey.scale = vec3(0.625, 0.625, 0.625)
     monkey.rotation = quat.eulerAngles(0,0,180)
-    r = monkey:add(craft.renderer, craft.mesh("Primitives:Monkey"))
+    r = monkey:add(craft.renderer, craft.model("Primitives:Monkey"))
     r.material = basicMat
     r.material.roughness = 0.6
     r.material.metalness = 0.25
@@ -66,7 +66,7 @@ function setup()
         light.entity.z = 5
 
         -- Represent each of the lights with a basic material sphere (which is unlit)
-        local r = light.entity:add(craft.renderer, craft.mesh.icosphere(0.1, 2))
+        local r = light.entity:add(craft.renderer, craft.model.icosphere(0.1, 2))
         r.material = craft.material("Materials:Basic")
         r.material.diffuse = light.color
         table.insert(lights, light)

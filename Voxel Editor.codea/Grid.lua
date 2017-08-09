@@ -24,7 +24,7 @@ function Grid:init(normal, origin, spacing, size, enabled)
     end
     
     self.entity = scene:entity()
-    self.r = self.entity:add(craft.renderer, craft.mesh.cube(vec3(1,1,1), vec3(0.5,0.5,0.5)))
+    self.r = self.entity:add(craft.renderer, craft.model.cube(vec3(1,1,1), vec3(0.5,0.5,0.5)))
     self.r.material = craft.material("Materials:Specular")
     self.r.material.blendMode = NORMAL
     self:modified()

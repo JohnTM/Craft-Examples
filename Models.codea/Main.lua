@@ -63,7 +63,7 @@ function loadModels(pack)
         local model = scene:entity()
         
         local mr = model:add(craft.renderer)  
-        mr.mesh = craft.mesh(pack..":"..v)
+        mr.mesh = craft.model(pack..":"..v)
 
         -- Tag the model for later
         model:add(Tag, pack..":"..v)
@@ -131,7 +131,7 @@ end
 function PrintExplanation()
     output.clear()
     print("Loading models is easy, simply create an entity and add a renderer component.")
-    print("Set the mesh using craft.mesh(asset)")
+    print("Set the mesh using craft.model(asset)")
     print("In this example we have used assetList to get all models from each asset pack")
     print("Models will try to load a material if there is one, otherwise a blank material will be used.")
 end

@@ -44,7 +44,7 @@ function setup()
 end
 
 function loadModel(modelNumber)
-    mr.mesh = craft.mesh("Nature:"..models[modelNumber])
+    mr.mesh = craft.model("Nature:"..models[modelNumber])
     local bounds = mr.mesh.bounds
     model.position = vec3(-bounds.center.x,0,-bounds.center.z) 
 end
@@ -63,7 +63,7 @@ end
 function PrintExplanation()
     output.clear()
     print("Loading models is easy, simply create an entity and add a MeshRenderer.")
-    print("Set the mesh using craft.mesh(asset)")
+    print("Set the mesh using craft.model(asset)")
     print("In this example we have used assetList to get all models from the nature pack")
     print("Models will try to load a material if there is one, otherwise a blank material will be used.")
 end
