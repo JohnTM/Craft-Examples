@@ -39,6 +39,10 @@ function OrbitViewer:init(entity, target, zoom, minZoom, maxZoom)
     touches.addHandler(self, 0, true) 
 end
 
+function OrbitViewer:destroyed()
+    touches.removeHandler(self)
+end
+
 -- Project a 2D point z units from the camera
 function OrbitViewer:project(p,z)
     local origin, dir = self.camera:screenToRay(p)   
