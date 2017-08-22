@@ -20,7 +20,7 @@ function setup()
   
     scene.ambientColor = color(61, 61, 61, 255)
     scene.sun:get(craft.light).intensity = 0.75
-    scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(0, 125, 25)
     scene.fogEnabled = false
     scene.fogNear = 5*16
     scene.fogFar = 7*16
@@ -98,7 +98,7 @@ function update(dt)
     else
         local angle = Angle
         local orbitDist = 120
-        camera.rotation = quat.eulerAngles(45,0,angle)    
+        camera.rotation = quat.eulerAngles(0, angle, 45)    
         camera.position = vec3(math.sin(math.rad(angle)) * -orbitDist,
                                     140,
                                     math.cos(math.rad(angle)) * -orbitDist) + vec3(16*sizeX/2,0,16*sizeZ/2)

@@ -13,7 +13,7 @@ function Car:init(e, section, direction, speed)
     
     self.pivot = scene:entity()
     self.pivot.parent = self.entity
-    self.pivot.rotation = quat.eulerAngles(0,0,(direction == DIRECTION_LEFT) and 90 or -90)
+    self.pivot.rotation = quat.eulerAngles(  0,  0, )
     
     -- Load and cache the car mesh
     if carMesh == nil then
