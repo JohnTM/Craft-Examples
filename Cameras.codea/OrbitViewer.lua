@@ -39,6 +39,10 @@ function OrbitViewer:init(entity, target, zoom, minZoom, maxZoom)
     touches.addHandler(self, 0, true) 
 end
 
+function OrbitViewer:destroyed()
+    touches.removeHandler(self)
+end
+
 -- Project a 2D point z units from the camera
 function OrbitViewer:project(p,z)
     local origin, dir = self.camera:screenToRay(p)   
@@ -98,7 +102,7 @@ function OrbitViewer:update()
     self.rx = math.min(math.max(self.rx, -90), 90)
 
     -- Calculate the camera's position and rotation
-    local rotation = quat.eulerAngles(self.rx, 0, self.ry)
+    local rotation = quat.eulerAngles(self.rx,  self.ry, 0)
     self.entity.rotation = rotation
     local t = vec3(self.target.x, self.target.y, self.target.z)
     self.entity.position = t + self.entity.forward * -self.zoom

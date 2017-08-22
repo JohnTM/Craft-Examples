@@ -31,7 +31,7 @@ function FirstPersonViewer:update()
     if self.enabled then  
         -- clamp vertical rotation between -90 and 90 degrees (no upside down view)
         self.rx = math.min(math.max(self.rx, -90), 90)
-        local rotation = quat.eulerAngles(self.rx, 0, self.ry)
+        local rotation = quat.eulerAngles(self.rx,  self.ry, 0)
         self.camera.rotation = rotation
     end
 end
