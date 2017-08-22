@@ -26,8 +26,8 @@ function setup()
     camera = scene.camera:get(craft.camera)
     camera.ortho = true 
     camera.orthoSize = 5
-    camera.entity.rotation = quat.eulerAngles(45,0,25)    
-    scene.sun.rotation = quat.eulerAngles(-45,0,65)
+    camera.entity.rotation = quat.eulerAngles(  45,  0, )    
+    scene.sun.rotation = quat.eulerAngles(  -45,  0, )
     
     sections = {}
 
