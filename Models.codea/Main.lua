@@ -32,7 +32,7 @@ function setup()
     -- Setup camera and lighting    
     scene.ambientColor = color(61, 61, 61, 255)
     scene.sun:get(craft.light).intensity = 1.0
-    scene.sun.rotation = quat.eulerAngles(-45,0,125)
+    scene.sun.rotation = quat.eulerAngles(0, 125, -45)
     scene.sky.active = false
     
     viewer = scene.camera:add(OrbitViewer, vec3(0,0,0), 75, 10, 200)

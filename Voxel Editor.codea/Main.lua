@@ -18,7 +18,7 @@ function setup()
     sx, sy, sz = volume:size()
 
     -- Setup camera and lighting
-    scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(0, 125, 25)
     
     -- Helper class for interactive camera
     viewer = scene.camera:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)

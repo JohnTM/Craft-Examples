@@ -108,16 +108,16 @@ function update()
     -- For now the generator may override the basic scene lighting so we set it again here
     scene.ambientColor = color(80, 55, 84, 255)
     scene.sun:get(craft.light).intensity = 0.9
-    scene.sun.rotation = quat.eulerAngles(25,0,95)
+    scene.sun.rotation = quat.eulerAngles(0, 95, 25)
 
     camera.nearPlane = 10
     camera.farPlane = 4000        
     
     local orbit = ElapsedTime * 12
-    moon.entity.rotation = quat.eulerAngles(0, 0, orbit)    
+    moon.entity.rotation = quat.eulerAngles(0,  orbit, 0)    
     moon.entity.position = moon.entity.forward * PLANET_RADIUS * 2.0
     
-    frog.rotation = quat.eulerAngles(0, 0, ElapsedTime * 180/2)
+    frog.rotation = quat.eulerAngles(0,  ElapsedTime * 180/2, 0)
     frog.position = frog.forward * (PLANET_RADIUS / 6 + 15)
 end
 

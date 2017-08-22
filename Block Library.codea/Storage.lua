@@ -23,7 +23,7 @@ function chest(capacity)
     end
     
     function chest:update()            
-        self.top.rotation = quat.eulerAngles(0, self.angle, 0)
+        self.top.rotation = quat.eulerAngles(self.angle,  0, 0)
     end
     
     function chest:interact()

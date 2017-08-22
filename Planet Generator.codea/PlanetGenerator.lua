@@ -144,7 +144,7 @@ end
 function PlanetGenerator:addSplat(img, size, opacity, x, y, z)    
     local s = scene:entity() 
     s.parent = self.splatParent
-    s.rotation = quat.eulerAngles(x,y,z)
+    s.rotation = quat.eulerAngles(y, z, x)
     s.position = -s.forward * self.radius
     
     local splatMesh = craft.model.cube(vec3(size,size,0))

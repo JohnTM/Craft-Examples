@@ -23,7 +23,7 @@ function setup()
     
     -- Setup lighting and camera
     scene.ambientColor = color(127, 127, 127, 255)
-    scene.sun.rotation = quat.eulerAngles(25,0,125)
+    scene.sun.rotation = quat.eulerAngles(0, 125, 25)
     scene.sun:get(craft.light).intensity = 0.75
     
     -- Adjust the skybox
@@ -34,7 +34,7 @@ function setup()
     camera = scene.camera:get(craft.camera)
     camera.ortho = true
     camera.orthoSize = 14
-    camera.entity.rotation = quat.eulerAngles(45,0,45)
+    camera.entity.rotation = quat.eulerAngles(0, 45, 45)
 
     -- Game state
     state = STATE_MENU

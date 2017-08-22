@@ -37,7 +37,7 @@ function Log:addPart()
     part.pivot = scene:entity()
     
     part.pivot.parent = self.entity
-    part.pivot.rotation = quat.eulerAngles(0,0,90)
+    part.pivot.rotation = quat.eulerAngles(0, 90, 0)
     part.pivot.scale = vec3(logScale * 0.5, logScale * 0.5, logScale)
         
     part.model = scene:entity()

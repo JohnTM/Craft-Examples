@@ -28,7 +28,7 @@ function setup()
     -- Create a monkey model to shine our lights on
     local monkey = scene:entity()
     monkey.scale = vec3(0.625, 0.625, 0.625)
-    monkey.rotation = quat.eulerAngles(0,0,180)
+    monkey.rotation = quat.eulerAngles(0, 180, 0)
     r = monkey:add(craft.renderer, craft.model("Primitives:Monkey"))
     r.material = basicMat
     r.material.roughness = 0.6
