@@ -74,7 +74,7 @@ function Player:update()
     if self.state == PLAYER_DEAD then
         -- Scale the model if the player is squashed
         self.pivot.scale = vec3(1 + self.squash * 0.0025, 1 + self.squash * 0.0025, 1 - self.squash * 0.0025) * 0.05
-        self.pivot.rotation = quat.eulerAngles(  45,  45, )
+        self.pivot.rotation = quat.eulerAngles(45, 45, 45)
     elseif self.state == PLAYER_DROWNED then
         -- Drop the model if the player drowns
         self.entity.y = self.entity.y - 5 * DeltaTime 
@@ -83,7 +83,7 @@ function Player:update()
         self.entity.position = self.pos * (1-self.jump) + self.nextPos * self.jump
         self.pivot.y = math.sin(self.jump * math.pi) * 0.75 -- self.squash * 0.0015
         self.pivot.scale = vec3(1 + self.squash * 0.0025, 1 - self.squash * 0.0025, 1 + self.squash * 0.0025) * 0.05
-        self.pivot.rotation = quat.eulerAngles(  0,  0, )
+        self.pivot.rotation = quat.eulerAngles(0, -self.rotation, 0)
         self.bounds:set(self.size, self.entity.worldPosition - self.size * 0.5)
         
         -- Check for car collisions

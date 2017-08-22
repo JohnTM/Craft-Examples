@@ -16,7 +16,7 @@ function generateBlockPreview(block)
     
     camera.ortho = true
     camera.orthoSize = 0.9
-    camera.entity.rotation = quat.eulerAngles(  35,  0, )
+    camera.entity.rotation = quat.eulerAngles(35, 45, 0)
     camera.entity.position = vec3(0.5, 0.5, 0.5) - camera.entity.forward * 5
     camera.clearColorEnabled = false
     sky.active = false
