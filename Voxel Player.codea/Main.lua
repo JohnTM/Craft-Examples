@@ -6,7 +6,7 @@ function setup()
     scene = craft.scene()
 
     -- Setup camera and lighting
-    scene.sun.rotation = quat.eulerAngles(  25,  0, )
+    scene.sun.rotation = quat.eulerAngles(25, 125, 0)
 
     -- Set the scenes ambient lighting
     scene.ambientColor = color(127, 127, 127, 255)   

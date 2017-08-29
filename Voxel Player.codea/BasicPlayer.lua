@@ -157,7 +157,6 @@ function BasicPlayer:update()
     
     if not self.flying then
         if self.grounded then
-            --self.rb.linearDamping = 0.98
             self.rb.friction = 0.95          
         else
             self.rb.friction = 0           
@@ -170,25 +169,25 @@ function BasicPlayer:update()
         
         local forward = self.camera.entity.forward * moveDir.z
         local right = self.camera.entity.right * moveDir.x
-        local up = self.camera.entity.up * moveDir.y
+        local up = vec3(0,1,0) * moveDir.y
         
         local finalDir = forward + right + up
         
         if not self.flying then
             finalDir.y = 0
-            if finalDir:len() > 0 then
-                finalDir = finalDir:normalize()
-            end
+        end
+        
+        if finalDir:len() > 0 then
+            finalDir = finalDir:normalize()
         end
         
         self.rb:applyForce(finalDir * self.maxForce)
     end
     
     local v = self.rb.linearVelocity
-    v.y = 0
+    
     if v:len() > self.speed then
         v = v:normalize() * self.speed
-        v.y = self.rb.linearVelocity.y
         self.rb.linearVelocity = v
     end
     
