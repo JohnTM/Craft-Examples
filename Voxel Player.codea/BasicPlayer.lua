@@ -41,7 +41,7 @@ function BasicPlayer:init(entity, camera, x, y, z)
         sound(SOUND_PICKUP, 41674)          
     end)
     self.hotbar.panel.pivot = vec2(0.5, 0)
-    self.hotbar.panel.anchor = vec2(0.5, 10/HEIGHT)
+    self.hotbar.panel.anchor = vec2(0.5, 15/HEIGHT)
     self.hotbar.panel.align.h = ui.CENTER
     self.hotbar.panel.align.v = ui.BOTTOM
     
@@ -185,9 +185,15 @@ function BasicPlayer:update()
     end
     
     local v = self.rb.linearVelocity
-    
+    if not self.flying then
+        v.y = 0
+    end
+
     if v:len() > self.speed then
         v = v:normalize() * self.speed
+        if not self.flying then
+            v.y = self.rb.linearVelocity.y
+        end
         self.rb.linearVelocity = v
     end
     

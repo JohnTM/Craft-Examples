@@ -50,7 +50,8 @@ function basicBlocks()
     local grass = scene.voxels.blocks:new("Grass")
     grass.setTexture(ALL, "Blocks:Dirt Grass")
     grass.setTexture(DOWN, "Blocks:Dirt")
-    grass.setTexture(UP, "Blocks:Grass Top")
+    grass.setTexture(UP, "Blocks:Blank White")
+    grass.setColor(UP, color(83,176,29))
     
     
     local dirt = scene.voxels.blocks:new("Dirt")
@@ -106,7 +107,7 @@ function basicBlocks()
     craftingTable.setTexture(ALL, "Blocks:Table")
 
         
-    local planks = scene.voxels.blocks:new("Pplanks")
+    local planks = scene.voxels.blocks:new("Planks")
     planks.setTexture(ALL, "Blocks:Wood")
     
     

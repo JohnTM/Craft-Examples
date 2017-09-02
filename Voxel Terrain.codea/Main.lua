@@ -14,16 +14,16 @@ function setup()
     
     allBlocks = blocks()
   
-    skyMat = scene.sky:get(craft.renderer).material
-    horizonColor = skyMat.horizonColor
-    skyColor = skyMat.skyColor
-  
-    scene.ambientColor = color(61, 61, 61, 255)
-    scene.sun:get(craft.light).intensity = 0.75
+    skyColor = color(0, 134, 255, 255)
+    horizonColor = color(157, 191, 223, 255)    
+    
+    scene.ambientColor = color(28, 28, 28, 255)
+    scene.sun:get(craft.light).intensity = 0.6
     scene.sun.rotation = quat.eulerAngles(25, 125, 0)
     scene.fogEnabled = false
-    scene.fogNear = 5*16
-    scene.fogFar = 7*16
+    scene.sky.active = false
+    
+    cameraSettings = scene.camera:get(craft.camera)
     
     camera = scene.camera
     
@@ -40,6 +40,23 @@ function setup()
     
     parameter.number("Angle", 0, 360, 45)
     
+    parameter.action("Spawn Player", function()
+        local pos = vec3(16*sizeX/2,128,16*sizeZ/2)
+    
+        -- Get surface position
+        scene.voxels:raycast(pos, vec3(0,-1,0), 128, function(coord, id, face)
+            if id and id ~= 0 then
+                pos.y = coord.y + 2
+                return true
+            end
+        end)
+        
+        player = scene:entity():add(BasicPlayer, scene.camera:get(craft.camera), pos:unpack())
+        scene.fogEnabled = true
+        
+        displayMode(FULLSCREEN)
+    end)
+
     parameter.watch("scene.voxels.visibleChunks")
     parameter.watch("scene.voxels.generatingChunks")
     parameter.watch("scene.voxels.meshingChunks")
@@ -62,7 +79,11 @@ function setup()
     scene.voxels:resize(vec3(sizeX,1,sizeZ))
     
     -- Set the maximum visible distance for voxels
-    scene.voxels.visibleRadius = 8
+    scene.voxels.visibleRadius = 6
+    
+    scene.fogNear = (scene.voxels.visibleRadius-1.25)*16
+    scene.fogFar = (scene.voxels.visibleRadius-0.5)*16
+    scene.fogColor = skyColor
     
     -- Set the initial coordinates for viewing the voxel terrain
     scene.voxels.coordinates = vec3(16*sizeX/2,0,16*sizeZ/2)
@@ -74,20 +95,6 @@ function setup()
     -- TODO Force regen by calling generate a second time with no params
     -- TODO Allow extra options to be passed in via json or a lua table
     
-    parameter.action("Spawn Player", function()
-        local pos = vec3(16*sizeX/2,128,16*sizeZ/2)
-    
-        -- Get surface position
-        scene.voxels:raycast(pos, vec3(0,-1,0), 128, function(coord, id, face)
-            if id and id ~= 0 then
-                pos.y = coord.y + 2
-                return true
-            end
-        end)
-        
-        player = scene:entity():add(BasicPlayer, scene.camera:get(craft.camera), pos:unpack())
-        scene.fogEnabled = true
-    end)
 end
 
 function update(dt)
@@ -115,10 +122,9 @@ function draw()
         player:draw() 
         
         local fogInterp = 1 - (player.viewer.rx + 90) / 180
-        local fogColor = horizonColor * (1-fogInterp) + skyColor * fogInterp
-        skyMat.horizonColor = fogColor
-        skyMat.skyColor = fogColor
-        scene.fogColor = color((fogColor * 255):unpack())
+        local fogColor = horizonColor:mix(skyColor, fogInterp)
+        scene.fogColor = fogColor
+        cameraSettings.clearColor = fogColor
     end   
     
 

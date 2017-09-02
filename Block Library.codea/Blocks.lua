@@ -1,11 +1,12 @@
 -- Loads all blocks
 function blocks()
     basicBlocks()
-    stairsBlock("stoneStairs", "Blocks:Stone")
+    stairsBlock("Stone Stairs", "Blocks:Stone")
     signBlock()
     piston()
     fence("Wooden Fence", "Blocks:Wood")    
     chest(40)
+    treeGenerator()
         
     -- Get a list of all block types
     local allBlocks = scene.voxels.blocks:all()

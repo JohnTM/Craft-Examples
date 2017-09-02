@@ -39,10 +39,18 @@ function setup()
     viewer.ry = 225
     viewer.rx = 45
     
+    AssetPack = 1
+    loadModels(packs[AssetPack])        
+    
     parameter.watch("packs[AssetPack]")     
-    parameter.integer("AssetPack", 1, #packs, 1, function(n)
-        loadModels(packs[n])        
+    parameter.action("Next Pack", function()
+        AssetPack = math.min(AssetPack+1, #packs)
+        loadModels(packs[AssetPack])        
     end)    
+    parameter.action("Previous Pack", function()
+        AssetPack = math.max(AssetPack-1, 1)
+        loadModels(packs[AssetPack])        
+    end)        
     parameter.boolean("ShowBounds", false)    
     
 end

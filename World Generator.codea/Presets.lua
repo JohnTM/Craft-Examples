@@ -37,6 +37,42 @@ planets.earth =
     }    
 }
 
+planets.mars = 
+{
+    ocean =
+    {
+        active = false,
+        color = color(23, 132, 171, 255),
+        opacity = 0.8,
+        depth = 10
+    },
+    
+    terrainRamp =
+    {
+        {0.0, 0.22, color(70, 30, 32, 255)},
+        {0.3, 0.5, color(84, 26, 32, 255)} ,
+        {0.8, color(156, 60, 68, 255)},
+        {0.9, color(234, 32, 36, 255)},
+        {0.99, 1.0, color(219, 23, 23, 255)},
+    },
+    
+    brushes =
+    {
+        {
+            image = readImage("Project:SandStoneBrush"),
+            count = {3,5},
+            size = {2.0, 5.0},
+            opacity = {0.25, 0.35}
+        },
+        {
+            image = readImage("Project:RockBrush2"),
+            count = {8,12},
+            size = {1.0, 3.0},
+            opacity = {0.4, 0.5}
+        }
+    }    
+}
+
 planets.moon = 
 {
     ocean =

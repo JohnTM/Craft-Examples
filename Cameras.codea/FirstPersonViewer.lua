@@ -20,6 +20,7 @@ function FirstPersonViewer:init(camera, tapHandler)
     self.state = IDLE
     self.enabled = true
     self.tapHandler = tapHandler
+    self.sensitivity = 0.25
     touches.addHandler(self, 0, false) 
 end
 
@@ -48,8 +49,8 @@ function FirstPersonViewer:touched(touch)
         end       
     elseif self.state == ROTATE then
         if touch.state == MOVING then
-            self.rx = self.rx - touch.deltaY * 0.5
-            self.ry = self.ry - touch.deltaX * 0.5
+            self.rx = self.rx - touch.deltaY * self.sensitivity
+            self.ry = self.ry - touch.deltaX * self.sensitivity
         elseif touch.state == ENDED then
             self.state = IDLE
         end           

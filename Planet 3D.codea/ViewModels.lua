@@ -10,6 +10,7 @@
 
 function setup()
     scene = craft.scene()
+    scene.sky.active = false
 
     models = assetList("Nature", "models")
     

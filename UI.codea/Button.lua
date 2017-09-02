@@ -19,6 +19,7 @@ function ui.button:init(params)
     {
         anchor = vec2(0.5,0.5),
         size = vec2(1,1),
+        align = {h = ui.STRETCH, v = ui.STRETCH},
         parent = self
     }
     

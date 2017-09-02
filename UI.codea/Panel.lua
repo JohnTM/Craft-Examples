@@ -42,6 +42,7 @@ function ui.panel:init(params)
     self.children = {}
     self.align = params.align or {h = ui.LEFT, v = ui.BOTTOM}
     self.border = params.border or 0
+    self.inset = params.inset or 10
     
     if params.bg then
         x,y,w,h = self:getFrame()
@@ -52,7 +53,7 @@ function ui.panel:init(params)
             anchor = vec2(0.5, 0.5),
             image=params.bg, 
             fillMode = IMAGE_STRETCH, 
-            inset = 10, 
+            inset = params.inset, 
             align = {h = ui.STRETCH, v = ui.STRETCH}
         }
     end

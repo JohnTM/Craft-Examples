@@ -34,6 +34,7 @@ function readProjectColor(key)
     return nil
 end
 
+--[[
 -- MultiStep
 function setup()
     steps = listProjectTabs()
@@ -60,4 +61,5 @@ function startStep()
     if PrintExplanation then PrintExplanation() end
     setup()
 end
+  ]]
 

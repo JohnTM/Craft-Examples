@@ -19,7 +19,7 @@ function generateTerrain(chunk)
     n = split(n, dirt, SEA_LEVEL-1)   
     n = split(n, stone, SEA_LEVEL-4)   
     
-    local b1 = blend2D(rollingPlains(),plains(),0.25,0.5, 0.2)
+    local b1 = blend2D(rollingPlains(),plains(), 0.25, 0.5, 0.2)
     local b2 = blend2D(b1,cliffs(),0.15,0.5, 0.2)  
     local flat = craft.noise.const(-0.2)  
     n = warp(n,cache2D(riverBed(b1)))

@@ -21,7 +21,8 @@ function BlockInventory:init(rows, cols, itemCallback)
         w = w, 
         h = h, 
         align = {h = ui.CENTER, v = ui.TOP},
-        bg = "UI:Grey Panel"
+        bg = "UI:Grey Panel",
+        inset = 10,
     }
 
     self.panel.cornerRadius = 5

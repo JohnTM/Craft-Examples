@@ -12,6 +12,7 @@
 	<array>
 		<string>BlockPreview</string>
 		<string>BasicBlocks</string>
+		<string>Tree</string>
 		<string>Sign</string>
 		<string>FenceBlock</string>
 		<string>PistonBlock</string>

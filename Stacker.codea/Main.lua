@@ -27,9 +27,10 @@ function setup()
     scene.sun:get(craft.light).intensity = 0.75
     
     -- Adjust the skybox
-    local skyMat = scene.sky:get(craft.renderer).material
-    skyMat.horizonColor = color(0, 0, 0, 255)
-    
+    local skyMat = scene.sky.material
+    skyMat.horizon = color(0, 0, 0, 255)
+    skyMat.ground = color(0, 0, 0, 255)
+        
     -- Use a fixed angle and orthographic view
     camera = scene.camera:get(craft.camera)
     camera.ortho = true
