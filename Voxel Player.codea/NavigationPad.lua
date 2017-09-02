@@ -1,13 +1,18 @@
 NavigationPad = class()
 
+NavigationPad.ButtonSize = 80
+
 function NavigationPad:init()
+    
+    local bs = NavigationPad.ButtonSize
+    
     -- you can accept and set parameters here
     self.panel = ui.panel
     {
-        x = WIDTH-300, 
+        x = WIDTH - bs*3, 
         y = 0,
-        w = 300,
-        h = 300,
+        w = bs*3,
+        h = bs*3,
         pivot = vec2(1,0),
         align = {h = ui.RIGHT, v = ui.BOTTOM}
         --bg = readImage("Documents:grey_button11"),
@@ -15,18 +20,15 @@ function NavigationPad:init()
     }
     self.panel.interactive = true
     
-    local icon = "UI:Grey Arrow Up Grey"
-    local iconMiddle = readImage("UI:Grey Box Tick")
-    
     self.buttons = 
     {
-        forward = self:navButton(100,200,100,100,5,icon,0),
-        right = self:navButton(200,100,100,100,5,icon,-90), 
-        backward = self:navButton(100,0,100,100,5,icon,180),
-        left = self:navButton(0,100,100,100,5,icon,90),
-        middle = self:navButton(100,100,100,100,10,iconMiddle), 
-        forwardLeft = self:navButton(0,200,100,100,15,icon,45),
-        forwardRight = self:navButton(200,200,100,100,15,icon,-45)                                                                                                      
+        forward = self:navButton(bs, bs*2, bs, bs, 2, "UI:Arrow Button Up", 0),
+        right = self:navButton(bs*2, bs, bs, bs, 2, "UI:Arrow Button Right", -90), 
+        backward = self:navButton(bs, 0, bs, bs, 2, "UI:Arrow Button Down", 180),
+        left = self:navButton(0, bs, bs, bs, 2 ,"UI:Arrow Button Left", 90),
+        middle = self:navButton(bs, bs, bs, bs, 2, "UI:Arrow Button Up"), 
+        forwardLeft = self:navButton(0, bs*2, bs, bs, 5, "UI:Arrow Button Up", 45),
+        forwardRight = self:navButton(bs*2, bs*2, bs, bs, 5, "UI:Arrow Button Up", -45)                                                                                                      
     }
 end
 
@@ -38,16 +40,16 @@ function NavigationPad:navButton(x,y,w,h,border,icon,r)
         w=w+10,
         h=h+10,
         align = {h = ui.STRETCH, v = ui.STRETCH},
-        normalBg = readImage("UI:Grey Button 02"),
+        normalBg = readImage(icon),
         parent = self.panel,
         border = border + 5,
-        normalFill = color(255, 255, 255, 138),
-        highlightedFill = color(191, 191, 191, 138)
+        normalFill = color(255, 255, 255, 255),
+        highlightedFill = color(191, 191, 191, 255)
     }
     
     if icon then
-        button.icon.img = icon
-        button.icon.rotation = r
+        --button.icon.img = icon
+        --button.icon.rotation = r
     end
     
     button.share = true
