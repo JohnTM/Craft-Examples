@@ -10,8 +10,9 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
-		<string>Cave</string>
 		<string>Generation</string>
+		<string>Cave</string>
+		<string>Deposit</string>
 		<string>Main</string>
 	</array>
 	<key>Dependencies</key>

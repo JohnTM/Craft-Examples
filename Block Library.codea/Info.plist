@@ -10,16 +10,17 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
-		<string>BlockPreview</string>
-		<string>BasicBlocks</string>
-		<string>Tree</string>
+		<string>Basic</string>
+		<string>Generators</string>
 		<string>Sign</string>
-		<string>FenceBlock</string>
-		<string>PistonBlock</string>
-		<string>Storage</string>
+		<string>Fence</string>
+		<string>Piston</string>
+		<string>Chest</string>
+		<string>Sound</string>
 		<string>TNT</string>
 		<string>Blocks</string>
 		<string>Main</string>
+		<string>BlockPreview</string>
 	</array>
 	<key>Dependencies</key>
 	<array>

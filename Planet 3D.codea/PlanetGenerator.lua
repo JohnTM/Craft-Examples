@@ -12,15 +12,15 @@ function setup()
     scene.sky.material.sky = color(20, 19, 29, 255)
     scene.sky.material.horizon = color(22, 21, 28, 255)
 
-    scene.sun:get(craft.light).intensity = 0.3
+    scene.sun:get(craft.light).intensity = 0.8
     scene.sun.parent = scene.camera
-    scene.ambientColor = color(40, 39, 33, 255)
+    scene.ambientColor = color(152, 152, 152, 255)
     
     local keyLight = scene:entity():add(craft.light, DIRECTIONAL)
     keyLight.entity.parent = scene.camera
     keyLight.entity.eulerAngles = vec3(-230,100,0)
     keyLight.intensity = 1.0
-    keyLight.color = color(216, 212, 131, 255)
+    keyLight.color = color(211, 203, 112, 255)
 
     modelStacks = 
     {
@@ -64,7 +64,7 @@ function setup()
     saved(parameter.integer, "Detail", 1, 5, 3)
     saved(parameter.number, "Frequency", 0.1, 3.0, 1.0)
     saved(parameter.number, "Height", 0.0, 4.0, 0.4)
-    saved(parameter.number, "Density", 0.0, 1000.0, 10.0)
+    saved(parameter.number, "Density", 0.0, 100.0, 10.0)
     saved(parameter.number, "ModelScale", 0.1, 1.0, 0.2)
     saved(parameter.number, "Spacing", 0.1, 10.0, 1)
     saved(parameter.number, "Force", 0.0, 200.0, 1.0)

@@ -1,0 +1,1 @@
+{"selected":7,"slots":[{"block":"Solid"},{"block":"Grass"},{"block":"Dirt"},{"block":"Stone"},{"block":"Water"},{"block":"Glass Frame"},{"block":"Sign"},[]]}

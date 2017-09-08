@@ -31,8 +31,6 @@ end
 
 function ui.image:setImage(img)
     self.img = img
-    
-    if self.img == nil then return end
 end
 
 function ui.image:draw()

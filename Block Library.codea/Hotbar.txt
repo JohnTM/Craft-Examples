@@ -1,1 +1,1 @@
-{"slots":[{"block":"Glass"},{"block":"Red Brick"},{"block":"Sign"},{"block":"Test"},{"block":"Piston"},{"block":"Wooden Fence"},{"block":"Chest"},[]],"selected":7}
+{"selected":5,"slots":[{"block":"Solid"},{"block":"Grass"},{"block":"Dirt"},{"block":"Sand"},{"block":"Sound"},{"block":"Sign"},{"block":"Piston"},[]]}

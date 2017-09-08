@@ -1,9 +1,9 @@
 -- A TNT block
 function tnt()
-    scene.voxels.blocks:addAsset("Dropbox:TNT")
     
     local tnt = scene.voxels.blocks:new("TNT")
-    tnt.setTexture(ALL, "Dropbox:TNT")
+    tnt.setTexture(ALL, "Blocks:Blank White")
+    tnt.setColor(ALL, color(203, 57, 53, 255))
     tnt.scripted = true
     
     function tnt:interact()

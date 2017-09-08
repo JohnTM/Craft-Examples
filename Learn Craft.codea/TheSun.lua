@@ -19,7 +19,7 @@ function setup()
     viewer = scene.camera:add(OrbitViewer, vec3(0), 30, 20, 100)
     
     parameter.color("AmbientLight", 
-        color(5, 5, 5), 
+        color(65, 65, 65, 255), 
         function(c) 
             scene.ambientColor = c
         end)   

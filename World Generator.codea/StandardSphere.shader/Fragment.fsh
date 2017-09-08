@@ -152,6 +152,33 @@ float viewZToPerspectiveDepth( const in float viewZ, const in float near, const 
 float perspectiveDepthToViewZ( const in float invClipZ, const in float near, const in float far ) {
   return ( near * far ) / ( ( far - near ) * invClipZ - far );
 }
+
+#ifdef GAMMA_CORRECTION
+const float gamma = 2.2;
+
+vec4 mapTexelToLinear( vec4 value )
+{
+    return vec4(pow(value.rgb, vec3(gamma)), value.a);
+}
+
+vec4 envMapTexelToLinear( vec4 value )
+{
+    return vec4(pow(value.rgb, vec3(gamma)), value.a);
+}
+
+#else
+
+vec4 mapTexelToLinear( vec4 value )
+{
+    return value;
+}
+
+vec4 envMapTexelToLinear( vec4 value )
+{
+    return value;
+}
+#endif
+
 #ifdef USE_COLOR
 
 	varying vec3 vColor;
@@ -1019,16 +1046,6 @@ float computeSpecularOcclusion( const in float dotNV, const in float ambientOccl
 #endif
 
 
-vec4 mapTexelToLinear( vec4 value )
-{
-    return value;
-}
-
-vec4 envMapTexelToLinear( vec4 value )
-{
-    return value;
-}
-
 void main() {
 
 	vec4 diffuseColor = vec4( diffuse, opacity );
@@ -1310,6 +1327,11 @@ IncidentLight directLight;
   gl_FragColor.rgb = toneMapping( gl_FragColor.rgb );
 
 #endif
+
+#ifdef GAMMA_CORRECTION
+    gl_FragColor.rgb = pow(gl_FragColor.rgb, vec3(1.0/gamma));
+#endif
+
 #ifdef USE_FOG
 
 	#ifdef USE_LOGDEPTHBUF_EXT

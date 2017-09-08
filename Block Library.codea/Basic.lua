@@ -43,8 +43,6 @@ function basicBlocks()
     scene.voxels.blocks.Empty.static.hasIcon = false
     scene.voxels.blocks.Empty.static.canPlace = false        
     
-    local redstone = scene.voxels.blocks:new("Redstone")
-    redstone.setTexture(ALL, "Blocks:Redstone")    
     
     local grass = scene.voxels.blocks:new("Grass")
     grass.setTexture(ALL, "Blocks:Dirt Grass")
@@ -53,6 +51,9 @@ function basicBlocks()
     
     local dirt = scene.voxels.blocks:new("Dirt")
     dirt.setTexture(ALL, "Blocks:Dirt")
+    
+    local sand = scene.voxels.blocks:new("Sand")
+    sand.setTexture(ALL, "Blocks:Sand") 
   
     local stone = scene.voxels.blocks:new("Stone")
     stone.setTexture(ALL, "Blocks:Stone")
@@ -61,8 +62,8 @@ function basicBlocks()
     bedrock.setTexture(ALL, "Blocks:Greystone")
     bedrock.static.canDig = false
     bedrock.static.canPlace = false
-    bedrock.tinted = true
-    bedrock.setColor(ALL, color(47, 47, 47, 255))
+    --bedrock.tinted = true
+    bedrock.setColor(ALL, color(128, 128, 128, 255))
     
     local water = scene.voxels.blocks:new("Water")
     water.setTexture(ALL, "Blocks:Water")
@@ -71,19 +72,16 @@ function basicBlocks()
     water.geometry = TRANSLUCENT  
     -- Translucent renderPass is for semi-transparent blocks (i.e alpha less than 255 and greater than 0)
     water.renderPass = TRANSLUCENT
-         
-    local sand = scene.voxels.blocks:new("Sand")
-    sand.setTexture(ALL, "Blocks:Sand") 
-    
-    local glassFrame = scene.voxels.blocks:new("Glass Frame")
-    glassFrame.setTexture(ALL, "Blocks:Glass Frame")
-    glassFrame.geometry = TRANSLUCENT
-    glassFrame.renderPass = TRANSLUCENT 
         
     local glass = scene.voxels.blocks:new("Glass")
     glass.setTexture(ALL, "Blocks:Glass")
     glass.geometry = TRANSLUCENT
-    glass.renderPass = TRANSLUCENT  
+    glass.renderPass = TRANSLUCENT 
+    
+    local glassFrame = scene.voxels.blocks:new("Glass Frame")
+    glassFrame.setTexture(ALL, "Blocks:Glass Frame")
+    glassFrame.geometry = TRANSLUCENT
+    glassFrame.renderPass = TRANSLUCENT  
         
     local brickRed = scene.voxels.blocks:new("Red Brick")
     brickRed.setTexture(ALL, "Blocks:Brick Red")
@@ -100,8 +98,8 @@ function basicBlocks()
     local diamondOre = scene.voxels.blocks:new("Diamond Ore")
     diamondOre.setTexture(ALL, "Blocks:Stone Diamond")   
 
-    local craftingTable = scene.voxels.blocks:new("Crafting Table")
-    craftingTable.setTexture(ALL, "Blocks:Table")
+    local redstoneOre = scene.voxels.blocks:new("Redstone Ore")
+    redstoneOre.setTexture(ALL, "Blocks:Redstone")        
        
     local planks = scene.voxels.blocks:new("Planks")
     planks.setTexture(ALL, "Blocks:Wood")
@@ -117,20 +115,6 @@ function basicBlocks()
     --leaves.renderPass = CUTOUT
     leaves.scripted = true     
     
-    local soundb = scene.voxels.blocks:new("Sound")
-    soundb.setTexture(ALL, "Blocks:Blank White")
-    soundb.tinted = true
-    soundb.scripted = true
-
-    function soundb:created()
-        local x,y,z = self:xyz()
-        math.randomseed(x * y * z)
-        local c =color(math.random(128,255), math.random(128,255), math.random(128,255))
-        self.voxels:set(x,y,z,"color", c)
-    end
-    
-    function soundb:interact()
-        local x,y,z = self:xyz()
-        sound(SOUND_RANDOM, x * y * z)
-    end   
+    local craftingTable = scene.voxels.blocks:new("Crafting Table")
+    craftingTable.setTexture(ALL, "Blocks:Table")
 end

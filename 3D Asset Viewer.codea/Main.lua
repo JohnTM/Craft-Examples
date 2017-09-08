@@ -22,6 +22,7 @@ function setup()
     packs = 
     {
         "Blocky Characters",
+        "Watercraft",
         "RacingKit",
         "SpaceKit",
         "CastleKit",

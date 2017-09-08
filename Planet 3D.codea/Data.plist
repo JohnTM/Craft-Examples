@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>Color</key>
-	<string>[36.0,251.0,0.0,255.0]</string>
+	<string>[255.0,219.0,0.0,255.0]</string>
 	<key>Density</key>
-	<real>129.87013244628906</real>
+	<real>28.354978561401367</real>
 	<key>Detail</key>
-	<real>3</real>
+	<real>4</real>
 	<key>Force</key>
 	<real>45.454544067382812</real>
 	<key>Frequency</key>

@@ -1,5 +1,6 @@
 function setup(material)
     -- Shader Options
+    material:addOption("GAMMA_CORRECTION", true)
     material:addOption("STANDARD", true)
     material:addOption("USE_LIGHTING", true)
     material:addOption("USE_COLOR", true)

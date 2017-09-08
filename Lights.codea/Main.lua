@@ -15,7 +15,6 @@ function setup()
     -- Disable the sky and sun to emphasise our custom lights
     scene.sun.active = false  
     scene.sky.active = false
-    scene.ambientColor = color(31, 31, 31, 255)
     
     basicMat = craft.material("Materials:Standard")
 
@@ -36,7 +35,8 @@ function setup()
     monkey.position = vec3(0, 0.25, 5)
     
     -- Set up some parameters to control the lights
-    parameter.color("Ambient", color(37, 37, 37))
+    parameter.color("Ambient", 
+    color(26, 26, 26, 255))
     parameter.integer("Type", DIRECTIONAL, SPOT, SPOT)
     types = {"DIRECTIONAL", "POINT", "SPOT"}
     parameter.watch("types[Type+1]")
@@ -52,8 +52,8 @@ function setup()
     -- Define the initial light colors
     colors = 
     {
-        color(255, 0, 190, 255),
-        color(0, 187, 255, 255),
+        color(255, 0, 1, 255),
+        color(255, 159, 0, 255),
         color(255, 231, 0, 255)
     }
     

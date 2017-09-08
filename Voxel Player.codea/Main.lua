@@ -18,7 +18,7 @@ function setup()
     scene.voxels.coordinates = vec3(0,0,0)
     
     -- Create ground put of grass
-    scene.voxels:fill("Grass")
+    scene.voxels:fill("Redstone Ore")
     scene.voxels:box(0,10,0,16*5,10,16*5)
     scene.voxels:fill("Dirt")
     scene.voxels:box(0,0,0,16*5,9,16*5)

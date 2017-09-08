@@ -67,6 +67,11 @@ function BasicPlayer:init(entity, camera, x, y, z)
     self.navPad.buttons.middle.onPressed = function(b,t)
         if t.tapCount == 2 then
             self:setFlying(not self.flying)
+            if self.flying then
+                self.navPad.buttons.middle.icon:setImage("UI:Blue Box Tick")
+            else
+                self.navPad.buttons.middle.icon:setImage("UI:Grey Box Tick")               
+            end
         end
     end
     
@@ -77,8 +82,7 @@ function BasicPlayer:init(entity, camera, x, y, z)
   
     self.entity.position = vec3(x,y,z)
     self.camera.entity.parent = self.entity
-    self.camera.entity.position = vec3(0,0.85,0)
-    
+    self.camera.entity.position = vec3(0,0.85,0) 
     
     self.fpsTouch = self.camera.entity:add(FirstPersonTouch, 0.6, 5,
     {
@@ -137,6 +141,9 @@ function BasicPlayer:update()
     end
     if self.navPad.buttons.left.highlighted then
         moveDir.x = moveDir.x + 1
+    end
+    if self.flying and self.navPad.buttons.middle.highlighted then
+        moveDir.y = moveDir.y + 1
     end
     
     local hit1 = scene.physics:sphereCast(self.entity.position, vec3(0,-1,0), 0.52, 0.48, ~0, ~BasicPlayer.GROUP)

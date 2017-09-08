@@ -36,6 +36,8 @@ function OrbitViewer:init(entity, target, zoom, minZoom, maxZoom)
     self.mx = 0
     self.my = 0
 
+    self.sensitivity = 0.25
+
     touches.addHandler(self, 0, true) 
 end
 
@@ -159,8 +161,8 @@ function OrbitViewer:touched(touch)
     
     -- When all touches are finished apply momentum if moving fast enough
     if #self.touches == 0 then
-        self.mx = -touch.deltaY / DeltaTime * 0.25
-        self.my = -touch.deltaX / DeltaTime * 0.25
+        self.mx = -touch.deltaY / DeltaTime * self.sensitivity
+        self.my = -touch.deltaX / DeltaTime * self.sensitivity
         if math.abs(self.mx) < 70 then 
             self.mx = 0
         end
@@ -169,8 +171,8 @@ function OrbitViewer:touched(touch)
         end
     -- When only one touch is active simply rotate the camera
     elseif #self.touches == 1 then
-        self.rx = self.rx - touch.deltaY * 0.25
-        self.ry = self.ry - touch.deltaX * 0.25        
+        self.rx = self.rx - touch.deltaY * self.sensitivity
+        self.ry = self.ry - touch.deltaX * self.sensitivity        
     end
     
     return false

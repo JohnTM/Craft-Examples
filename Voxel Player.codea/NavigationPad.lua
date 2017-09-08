@@ -10,7 +10,7 @@ function NavigationPad:init()
     self.panel = ui.panel
     {
         x = WIDTH - bs*3 - 20, 
-        y = 20,
+        y = 100,
         w = bs*3,
         h = bs*3,
         pivot = vec2(1,0),
