@@ -1,12 +1,12 @@
--------------------------------------------------------------------------------
+-----------------------------------------
 -- FirstPersonViewer
 -- Written by John Millard
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Description:
 -- A basic viewer for first person cameras.
 -- Attach to a camera's entity for basic first person controls:
 -- i.e. scene.camera:add(FirstPersonViewer)
--------------------------------------------------------------------------------
+-----------------------------------------
 
 FirstPersonViewer = class()
 

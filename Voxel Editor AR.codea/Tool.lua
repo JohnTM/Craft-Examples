@@ -1,4 +1,4 @@
--- The tools used to apply voxels in the editor
+-- The tools used to apply voxels in the ditor
 
 TOOL_ADD = 1
 TOOL_REPLACE = 2 
@@ -52,7 +52,7 @@ function Tool:touched(touch)
     end
     
     if coord and touch.state == BEGAN and self.state == TOOL_STATE_IDLE then
-        if #viewer.touches > 0 then return false end
+        --if #viewer.touches > 0 then return false end
         self.startCoord = coord
         self.endCoord = coord
         self.state = TOOL_STATE_DRAG

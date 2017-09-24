@@ -1,13 +1,16 @@
 -----------------------------------------
--- Voxel Editor
+-- Voxel Editor AR
 -- Written by John Millard
 -----------------------------------------
 -- Description:
--- A basic Voxel Editor.
--- Use the editor to save and load voxels models in the cvox format (Codea Voxel).
+-- The Voxel Editor adapted for AR* mode.
+--
+-- * Please note that only devices with an A9 processor or above support AR.
+--   This is an iOS 11 only feature.
 -----------------------------------------
 
 displayMode(FULLSCREEN)
+supportedOrientations(LANDSCAPE_ANY)
 
 -- Use this function to perform your initial setup
 function setup()
@@ -18,20 +21,25 @@ function setup()
     solid.static.icon = generateBlockPreview(solid)
 
     scene.ambientColor = color(77, 77, 77, 255)
-    scene.sky.active = false
+    --scene.sky.active = false
+    
+    root = scene:entity()
+    root.scale = vec3(0.025, 0.025, 0.025)
 
     -- Create a volume for rendering our voxel model
     volumeEntity = scene:entity()
     volume = volumeEntity:add(craft.volume, 5, 5, 5)
+    volumeEntity.parent = root
+    volumeEntity.position = vec3(0)
     sx, sy, sz = volume:size()
 
     -- Setup camera and lighting
     scene.sun.rotation = quat.eulerAngles(25, 125, 0)
     
     -- Helper class for interactive camera
-    viewer = scene.camera:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)
-    viewer.rx = 45
-    viewer.ry = -45
+    --viewer = scene.camera:add(OrbitViewer, vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5), 20, 5, 40)
+    --viewer.rx = 45
+    --viewer.ry = -45
 
     -- Tool handles editing the voxel volume
     tool = Tool()  
@@ -47,11 +55,6 @@ function setup()
     grids = 
     {
         bottom = Grid(vec3(0,1,0), vec3(0,0,0), 1, vec3(sx,sy,sz), true),
-        top = Grid(vec3(0,-1,0), vec3(0,sy,0), 1, vec3(sx,sy,sz), false),
-        left = Grid(vec3(1,0,0), vec3(0,0,0), 1, vec3(sx,sy,sz), false),
-        right = Grid(vec3(-1,0,0), vec3(sx,0,0), 1, vec3(sx,sy,sz), false),
-        front = Grid(vec3(0,0,1), vec3(0,0,0), 1, vec3(sx,sy,sz), false),
-        back = Grid(vec3(0,0,-1), vec3(0,0,sz), 1, vec3(sx,sy,sz), false)
     }
     
     toolPanel = UI.Panel(0,HEIGHT-40,WIDTH,40)
@@ -69,6 +72,19 @@ function setup()
     addSaveParameters()
     
     saveSnapshot()
+    
+    if craft.ar.isSupported then
+        scene.ar:run()
+
+        scene.ar.didAddAnchors = function(anchors)
+            if not root.active then
+                root.position = anchors[1].position
+                root.active = true
+            end
+        end
+    end
+
+    root.active = false
 end
 
 function addSaveParameters()
@@ -111,9 +127,6 @@ function addSaveParameters()
 end
 
 function updateGrid()
-    grids.right.origin.x = sx
-    grids.back.origin.z = sz
-    grids.top.origin.y = sy
     for k,v in pairs(grids) do
         v.size.x = sx
         v.size.y = sy
@@ -129,8 +142,8 @@ function resizeVolume()
         sx, sy, sz = volume:size()
         updateGrid()
         
-        viewer.target = vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5)
-        viewer.origin = viewer.target
+        --viewer.target = vec3(sx/2 + 0.5, sy/2 + 0.5, sz/2 + 0.5)
+        --viewer.origin = viewer.target
 
         shouldResize = false
         saveSnapshot()
@@ -177,7 +190,7 @@ function update(dt)
     end
     
     local r = shelf:right() / WIDTH
-    scene.camera:get(craft.camera):viewport(r,0,1.0-r,1)
+    --scene.camera:get(craft.camera):viewport(r,0,1.0-r,1)
 end
 
 -- Perform 2D drawing (UI)

@@ -25,6 +25,7 @@ function imageButton(x,y,w,h,i,f)
         highlightedBg = "UI:Blue Button10",
         normalFill = color(255, 255, 255, 255),
         align = {h = ui.CENTER, v = ui.CENTER},
+        inset = 10
     }
     
     return button

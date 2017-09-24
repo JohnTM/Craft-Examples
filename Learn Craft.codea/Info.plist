@@ -12,10 +12,9 @@
 	<array>
 		<string>Scene</string>
 		<string>Entities</string>
-		<string>MovingTheCamera</string>
+		<string>Cameras</string>
 		<string>Viewers</string>
 		<string>TheSky</string>
-		<string>TheSun</string>
 		<string>Main</string>
 	</array>
 	<key>Dependencies</key>
@@ -26,5 +25,7 @@
 	<string>No description available</string>
 	<key>Icon</key>
 	<string>Icon.png</string>
+	<key>Order</key>
+	<integer>0</integer>
 </dict>
 </plist>

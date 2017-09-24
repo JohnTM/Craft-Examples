@@ -20,5 +20,7 @@
 	</array>
 	<key>Description</key>
 	<string>No description available</string>
+	<key>Order</key>
+	<integer>10</integer>
 </dict>
 </plist>

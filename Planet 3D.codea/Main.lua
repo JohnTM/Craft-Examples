@@ -1,10 +1,10 @@
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Planet 3D
 -- Written by John Millard
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Description:
 -- Demonstrates procedural mesh generation and model loading.
--------------------------------------------------------------------------------
+-----------------------------------------
 
 -- A helper function that allows for saved parameters using project data
 function saved(func, name, min, max, initial, callback)

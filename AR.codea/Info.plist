@@ -10,17 +10,17 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
+		<string>Cube</string>
+		<string>Plane</string>
 		<string>Main</string>
 	</array>
 	<key>Dependencies</key>
-	<array>
-		<string>Cameras</string>
-	</array>
+	<array/>
 	<key>Description</key>
 	<string>No description available</string>
 	<key>Icon</key>
 	<string>Icon.png</string>
 	<key>Order</key>
-	<integer>1</integer>
+	<integer>14</integer>	
 </dict>
 </plist>

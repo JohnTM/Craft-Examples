@@ -10,17 +10,25 @@
 	<string>John Millard</string>
 	<key>Buffer Order</key>
 	<array>
+		<string>UI</string>
+		<string>Grid</string>
+		<string>Tool</string>
+		<string>Shelf</string>
 		<string>Main</string>
 	</array>
+	<key>Created</key>
+	<string>2016-11-25 08:19:11 +0000</string>
 	<key>Dependencies</key>
 	<array>
 		<string>Cameras</string>
+		<string>Touches</string>
+		<string>Block Library</string>
 	</array>
 	<key>Description</key>
 	<string>No description available</string>
 	<key>Icon</key>
 	<string>Icon.png</string>
 	<key>Order</key>
-	<integer>1</integer>
+	<integer>15</integer>
 </dict>
 </plist>

@@ -1,9 +1,10 @@
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Learn Craft
 -- Written by John Millard
--------------------------------------------------------------------------------
+-- Special thanks to Ignatz for the MultiStep project template
+-----------------------------------------
 -- Description:
--------------------------------------------------------------------------------
+-----------------------------------------
 
 -- MultiStep
 function setup()
@@ -26,17 +27,18 @@ function drawStepName()
     textAlign(LEFT)
     textMode(CORNER)
     
-    local name = string.gsub(steps[Step], "([A-Z])", " %1")    
+    local name = string.gsub(steps[lastStep], "([A-Z])", " %1")    
     text(name, 10, HEIGHT - 60)
 end
 
 function startStep()
     if cleanup then cleanup() end
-    lastStep=Step or  readProjectData("lastStep") or 1
+    lastStep=Step or  readLocalData("lastStep") or 1
     lastStep=math.min(lastStep,#steps)
-    saveProjectData("lastStep",lastStep) 
+    saveLocalData("lastStep",lastStep) 
     parameter.clear()
-    parameter.integer("Step", 1, #steps, lastStep, showList)
+    parameter.integer("Step", 1, #steps, lastStep)
+    parameter.watch("steps[Step]")
     parameter.action("Run", startStep)
     parameter.action("Next", function()
         Step = math.min(Step + 1, #steps)

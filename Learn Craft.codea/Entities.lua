@@ -6,17 +6,24 @@ function setup()
     scene.sky.active = false
     createGround(-1.125)
 
+    -- Create a new entity
     myEntity = scene:entity()
+    
+    -- Set its model for drawing
     myEntity.model = craft.model("Blocky Characters:Robot")
+    
+    -- Adjust position and scale
     myEntity.y = -1
     myEntity.z = 0
     myEntity.scale = vec3(1,1,1) / 8
     
+    -- Move camera back a little
     scene.camera.z = -4
     
     parameter.number("Rotate", 0, 360, 180)
 end
 
+-- Creates the ground using a box model and applies a simple textured material
 function createGround(y)
     local ground = scene:entity()
     ground.model = craft.model.cube(vec3(4,0.125,4))
@@ -29,7 +36,7 @@ function createGround(y)
 end
 
 function update(dt)
-    -- Rotate the entit   
+    -- Rotate the entity 
     myEntity.eulerAngles = vec3(0, Rotate, 0)
     
     -- Update the scene (physics, transforms etc)

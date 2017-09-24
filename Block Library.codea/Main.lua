@@ -1,13 +1,13 @@
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Block Library
 -- Written by John Millard
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Description:
 -- This project contains the shared block library for Codea.
 -- Add this project as a dependency and call the function blocks() to make use 
 -- of it in your own voxel-based projects.
 -- Run this project to see a preview of each block type
--------------------------------------------------------------------------------
+-----------------------------------------
 
 displayMode(FULLSCREEN)
 

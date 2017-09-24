@@ -7,6 +7,10 @@ function setup()
 end
 
 function cleanup()
+    if viewer then
+        touches.removeHandler(viewer)
+        viewer = nil
+    end
     scene = nil
     collectgarbage()
 end

@@ -46,7 +46,7 @@ function setup()
     camera = scene.camera:get(craft.camera)
 
     -- Get the sky material and adjust color to black
-    skyMat = scene.sky:get(craft.renderer).material
+    skyMat = scene.sky.material
     skyMat.sky = color(0, 0, 0, 255)
     skyMat.horizon = color(0, 0, 0, 255)
     
@@ -64,7 +64,7 @@ function setup()
     -- Manual Regeneration
     parameter.integer("Seed", 0, 1000, 121)
     parameter.action("Generate", function() 
-        planet:generate(gen, planets.mars)
+        planet:generate(gen, planets.earth)
         moon:generate(moonGen, planets.moon)
     end)
     parameter.boolean("ShowCubeMap", false)

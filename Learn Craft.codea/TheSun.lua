@@ -5,7 +5,7 @@ function setup()
     scene = craft.scene()
     
     myEntity = scene:entity()
-    myEntity.model = craft.model("Dropbox:2LL_Chest")
+    myEntity.model = craft.model("Primitives:Monkey")
     myEntity.material = craft.material("Materials:Standard")
     myEntity.eulerAngles = vec3(0, 180, 0)
    

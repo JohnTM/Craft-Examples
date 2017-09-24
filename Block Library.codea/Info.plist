@@ -33,5 +33,7 @@
 	<string>No description available</string>
 	<key>Icon</key>
 	<string>Icon.png</string>
+	<key>Order</key>
+	<integer>7</integer>
 </dict>
 </plist>

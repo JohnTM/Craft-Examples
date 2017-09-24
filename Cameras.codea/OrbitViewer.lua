@@ -1,7 +1,7 @@
--------------------------------------------------------------------------------
+-----------------------------------------
 -- OrbitViewer
 -- Written by John Millard
--------------------------------------------------------------------------------
+-----------------------------------------
 -- Description:
 -- A basic viewer that orbits a target via rotating, panning and zooming.
 -- A particular point in space is used as the target. 
@@ -9,7 +9,7 @@
 -- Two finger drag is used for panning.
 -- Attach to a camera's entity for basic first person controls:
 -- i.e. scene.camera:add(OrbitViewer)
--------------------------------------------------------------------------------
+-----------------------------------------
 
 OrbitViewer = class()
 
